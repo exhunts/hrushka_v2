@@ -465,7 +465,7 @@ body {
   }
 }
 
--webkit-keyframes rotateIn {
+@-webkit-keyframes rotateIn {
   from {
     -webkit-transform: rotate3d(0, 0, 1, -200deg);
     transform: rotate3d(0, 0, 1, -200deg);

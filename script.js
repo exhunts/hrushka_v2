@@ -1,3 +1,7 @@
+// const mainMusic = new Audio('/sounds/main-music.mp3')
+let audio = document.getElementById('audio')
+let source = document.getElementById('audio-source')
+
 const PLAYER_ONE = 1
 const PLAYER_TWO = 2
 const NONE = 0
@@ -36,6 +40,13 @@ const initGameState = {
 function newGame() {
   gameState = { ...initGameState, finalScore: gameState.finalScore }
   render('newgame')
+  playSound('newgame')
+  //   source.src = 'sounds/main-music.mp3'
+  //   audio.loop = true
+  //   audio.volume = 0.2
+  //   audio.load()
+  //   audio.play()
+  //   mainMusic.play()
   //   initGame()
 }
 
@@ -76,6 +87,12 @@ function hold() {
       if (gameState.pointsOfPlayerOne >= gameState.finalScore) {
         gameState.playerWin = PLAYER_ONE
         gameState.isGamePlaing = false
+
+        source.src = 'sounds/win-music.mp3'
+        audio.loop = false
+        audio.volume = 1
+        audio.load()
+        audio.play()
       } else {
         gameState.playerTurn = PLAYER_TWO
       }
@@ -86,6 +103,11 @@ function hold() {
       if (gameState.pointsOfPlayerTwo >= gameState.finalScore) {
         gameState.playerWin = PLAYER_TWO
         gameState.isGamePlaing = false
+
+        source.src = 'sounds/win-music.mp3'
+        audio.loop = false
+        audio.load()
+        audio.play()
       } else {
         gameState.playerTurn = PLAYER_ONE
       }
@@ -153,7 +175,6 @@ function render(atAction) {
           'animate__infinite',
           'animate__rubberBand'
         )
-
       break
 
     case 'rolldices':
@@ -274,8 +295,8 @@ function render(atAction) {
           document
             .getElementById('result-img-player-2')
             .classList.add('animate__animated', 'animate__swing')
-
           break
+
         case PLAYER_TWO:
           document.getElementById('btn-hold').classList.add('btn--disabled')
           document
@@ -319,7 +340,6 @@ function render(atAction) {
               'animate__infinite',
               'animate__flip'
             )
-
           document
             .getElementById('result-img-player-1')
             // .classList.add('animate__animated', 'animate__bounceInLeft')
@@ -342,6 +362,21 @@ function render(atAction) {
           //     )
           break
       }
+      break
+  }
+}
+
+function playSound(atState) {
+  switch (atState) {
+    case 'newgame':
+      source.src = 'sounds/main-music.mp3'
+      audio.loop = true
+      audio.volume = 0.2
+      audio.load()
+      audio.play()
+      break
+
+    default:
       break
   }
 }
