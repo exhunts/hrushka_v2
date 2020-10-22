@@ -17,11 +17,19 @@
           </button>
           <img id="dice-1" class="dice" src="images/dice-3.png" alt="image" />
           <img id="dice-2" class="dice" src="images/dice-5.png" alt="image" />
-          <button class="btn btn--green" onclick="rollDice()">
-            <span>Roll Dice</span>
+          <button
+            id="btn-roll-dices"
+            class="btn btn--green btn--disabled"
+            onclick="rollDices()"
+          >
+            <span>Roll Dices</span>
             <img class="btn-image" src="images/roll-dices.png" alt="image" />
           </button>
-          <button class="btn btn--yellow" onclick="hold()">
+          <button
+            id="btn-hold"
+            class="btn btn--yellow btn--disabled"
+            onclick="hold()"
+          >
             <span>Hold</span>
             <img class="btn-image" src="images/grab-points.png" alt="image" />
           </button>
@@ -36,32 +44,37 @@
         </div>
         <div class="player-side">
           <div class="player-name">Player 1</div>
-          <div class="player-score">0</div>
+          <div id="player-1-score" class="player-score">0</div>
+          <img id="result-img-player-1" class="win-pig" src="" alt="" />
           <img
+            id="player-1-dancer"
             class="player-dancer-gif dance"
             src="images/dancer-1.gif"
             alt="gif"
           />
           <div class="player-safe">
             <div class="player-safe-text">safe</div>
-            <div class="player-safe-points">0</div>
+            <div id="player-1-safe-points" class="player-safe-points">0</div>
           </div>
         </div>
 
         <div class="player-side">
-          <div class="player-name">Player 1</div>
-          <div class="player-score">0</div>
+          <div class="player-name">Player 2</div>
+          <div id="player-2-score" class="player-score">0</div>
+          <img id="result-img-player-2" class="loose-cat" src="" alt="" />
           <img
+            id="player-2-dancer"
             class="player-dancer-gif dance"
             src="images/dancer-2.gif"
             alt="gif"
           />
           <div class="player-safe">
             <div class="player-safe-text">safe</div>
-            <div class="player-safe-points">0</div>
+            <div id="player-2-safe-points" class="player-safe-points">0</div>
           </div>
         </div>
       </div>
     </div>
+    <script src="script.js"></script>
   </body>
 </html>
