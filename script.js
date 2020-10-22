@@ -88,11 +88,11 @@ function hold() {
         gameState.playerWin = PLAYER_ONE
         gameState.isGamePlaing = false
 
-        source.src = 'sounds/win-music.mp3'
-        audio.loop = false
-        audio.volume = 1
-        audio.load()
-        audio.play()
+        // source.src = 'sounds/win-music.mp3'
+        // audio.loop = false
+        // audio.volume = 1
+        // audio.load()
+        // audio.play()
       } else {
         gameState.playerTurn = PLAYER_TWO
       }
@@ -104,16 +104,17 @@ function hold() {
         gameState.playerWin = PLAYER_TWO
         gameState.isGamePlaing = false
 
-        source.src = 'sounds/win-music.mp3'
-        audio.loop = false
-        audio.load()
-        audio.play()
+        // source.src = 'sounds/win-music.mp3'
+        // audio.loop = false
+        // audio.load()
+        // audio.play()
       } else {
         gameState.playerTurn = PLAYER_ONE
       }
       break
   }
   render('hold')
+  playSound('hold')
 }
 
 function render(atAction) {
@@ -366,8 +367,8 @@ function render(atAction) {
   }
 }
 
-function playSound(atState) {
-  switch (atState) {
+function playSound(atAction) {
+  switch (atAction) {
     case 'newgame':
       source.src = 'sounds/main-music.mp3'
       audio.loop = true
@@ -376,8 +377,29 @@ function playSound(atState) {
       audio.play()
       break
 
+    case 'hold':
+      switch (gameState.playerTurn) {
+        case PLAYER_ONE:
+          if (gameState.pointsOfPlayerOne >= gameState.finalScore) {
+            source.src = 'sounds/win-music.mp3'
+            audio.loop = false
+            audio.volume = 1
+            audio.load()
+            audio.play()
+          }
+          break
+        case PLAYER_TWO:
+          if (gameState.pointsOfPlayerTwo >= gameState.finalScore) {
+            source.src = 'sounds/win-music.mp3'
+            audio.loop = false
+            audio.volume = 1
+            audio.load()
+            audio.play()
+          }
+      }
+
     default:
-      break
+      throw Error(`playSound: switch/case ${atAction} not found`)
   }
 }
 
