@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="user-scalable=yes" />
+    <link rel="shortcut icon" type="image/png" href="images/pig-nose.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Hrushka</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="panel">
+        <div class="nav">
+          <button class="btn" onclick="newGame()">
+            <span>New game</span>
+            <img class="btn-image" src="images/chicken.png" alt="image" />
+          </button>
+          <img id="dice-1" class="dice" src="images/dice-3.png" alt="image" />
+          <img id="dice-2" class="dice" src="images/dice-5.png" alt="image" />
+          <button class="btn btn--green" onclick="rollDice()">
+            <span>Roll Dice</span>
+            <img class="btn-image" src="images/roll-dices.png" alt="image" />
+          </button>
+          <button class="btn btn--yellow" onclick="hold()">
+            <span>Hold</span>
+            <img class="btn-image" src="images/grab-points.png" alt="image" />
+          </button>
+          <div class="win-points">
+            <img
+              class="win-points-img"
+              src="images/tv-win-points.png"
+              alt="image"
+            />
+            <input class="win-points-input" type="text" placeholder="20" />
+          </div>
+        </div>
+        <div class="player-side">
+          <div class="player-name">Player 1</div>
+          <div class="player-score">0</div>
+          <img
+            class="player-dancer-gif dance"
+            src="images/dancer-1.gif"
+            alt="gif"
+          />
+          <div class="player-safe">
+            <div class="player-safe-text">safe</div>
+            <div class="player-safe-points">0</div>
+          </div>
+        </div>
+
+        <div class="player-side">
+          <div class="player-name">Player 1</div>
+          <div class="player-score">0</div>
+          <img
+            class="player-dancer-gif dance"
+            src="images/dancer-2.gif"
+            alt="gif"
+          />
+          <div class="player-safe">
+            <div class="player-safe-text">safe</div>
+            <div class="player-safe-points">0</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
