@@ -89,13 +89,13 @@ function hold() {
       }
       break
   }
-  document.getElementById('btn-hold').classList.add('btn--disabled')
-  document.getElementById('player-1-score').innerText =
-    gameState.pointsOfPlayerOne
-  document.getElementById('player-2-score').innerText =
-    gameState.pointsOfPlayerTwo
-  document.getElementById('player-1-safe-points').innerText = 0
-  document.getElementById('player-1-safe-points').innerText = 0
+  //   document.getElementById('btn-hold').classList.add('btn--disabled')
+  //   document.getElementById('player-1-score').innerText =
+  //     gameState.pointsOfPlayerOne
+  //   document.getElementById('player-2-score').innerText =
+  //     gameState.pointsOfPlayerTwo
+  //   document.getElementById('player-1-safe-points').innerText = 0
+  //   document.getElementById('player-1-safe-points').innerText = 0
 
   //   debugger !!!!
   //   switch (gameState.playerTurn) {
@@ -112,122 +112,121 @@ function hold() {
   //   }
   //   debugger !!!!
 
-  let win_img_player_1
-  let clonedWin_img_player_1
-  let win_img_player_2
-  let clonedWin_img_player_2
-  switch (gameState.playerWin) {
-    case PLAYER_ONE:
-      document.getElementById('btn-hold').classList.add('btn--disabled')
-      document.getElementById('btn-roll-dices').classList.add('btn--disabled')
-      document.getElementById('player-1-dancer').classList.remove('dance')
-      document.getElementById('player-2-dancer').classList.remove('dance')
-      //   audio.play()
-      //   music.pause()
-      //   music.currentTime = 0
-      //   winMusic.play()
+  render('hold')
 
-      //   document.getElementById('winner-text').innerText = 'Player one win'
-      //   document
-      //     .getElementById('winner-text')
-      //     .classList.add(
-      //       'animate__animated',
-      //       'animate__infinite',
-      //       'animate__rubberBand'
-      //     )
-      //set image
-      document.getElementById('result-img-player-1').src = 'images/win-pig.png'
+  //   let win_img_player_1
+  //   let clonedWin_img_player_1
+  //   let win_img_player_2
+  //   let clonedWin_img_player_2
+  //   switch (gameState.playerWin) {
+  //     case PLAYER_ONE:
+  //       document.getElementById('btn-hold').classList.add('btn--disabled')
+  //       document.getElementById('btn-roll-dices').classList.add('btn--disabled')
+  //       document.getElementById('player-1-dancer').classList.remove('dance')
+  //       document.getElementById('player-2-dancer').classList.remove('dance')
 
-      //get element by id
-      win_img_player_1 = document.getElementById('result-img-player-1')
-      // clone element
-      clonedWin_img_player_1 = document
-        .getElementById('result-img-player-1')
-        .cloneNode(true)
-      //replace
-      win_img_player_1.parentNode.replaceChild(
-        clonedWin_img_player_1,
-        win_img_player_1
-      )
+  //   audio.play()
+  //   music.pause()
+  //   music.currentTime = 0
+  //   winMusic.play()
 
-      document
-        .getElementById('result-img-player-1')
-        .classList.add(
-          'animate__animated',
-          'animate__infinite',
-          'animate__flip'
-        )
+  //   document.getElementById('winner-text').innerText = 'Player one win'
+  //   document
+  //     .getElementById('winner-text')
+  //     .classList.add(
+  //       'animate__animated',
+  //       'animate__infinite',
+  //       'animate__rubberBand'
+  //     )
+  //   document.getElementById('result-img-player-1').src = 'images/win-pig.png'
 
-      document.getElementById('result-img-player-2').src =
-        'images/cat-loose.png'
-      win_img_player_2 = document.getElementById('result-img-player-2')
-      clonedWin_img_player_2 = document
-        .getElementById('result-img-player-2')
-        .cloneNode(true)
-      win_img_player_2.parentNode.replaceChild(
-        clonedWin_img_player_2,
-        win_img_player_2
-      )
-      document
-        .getElementById('result-img-player-2')
-        .classList.add('animate__animated', 'animate__swing')
+  //   win_img_player_1 = document.getElementById('result-img-player-1')
+  //   clonedWin_img_player_1 = document
+  //     .getElementById('result-img-player-1')
+  //     .cloneNode(true)
+  //   win_img_player_1.parentNode.replaceChild(
+  //     clonedWin_img_player_1,
+  //     win_img_player_1
+  //   )
 
-      break
-    case PLAYER_TWO:
-      document.getElementById('btn-hold').classList.add('btn--disabled')
-      document.getElementById('btn-roll-dices').classList.add('btn--disabled')
-      document.getElementById('player-1-dancer').classList.remove('dance')
-      document.getElementById('player-2-dancer').classList.remove('dance')
-      //   audio.play()
-      //   music.pause()
-      //   music.currentTime = 0
-      //   winMusic.play()
-      //   document.getElementById('winner-text').innerText = 'Player two win'
-      document.getElementById('result-img-player-1').src =
-        'images/cat-loose.png'
-      document.getElementById('result-img-player-2').src = 'images/win-pig.png'
+  //   document
+  //     .getElementById('result-img-player-1')
+  //     .classList.add(
+  //       'animate__animated',
+  //       'animate__infinite',
+  //       'animate__flip'
+  //     )
 
-      // win_img_player_2 = document.getElementById('win-img-player-2')
+  //   document.getElementById('result-img-player-2').src =
+  //     'images/cat-loose.png'
+  //   win_img_player_2 = document.getElementById('result-img-player-2')
+  //   clonedWin_img_player_2 = document
+  //     .getElementById('result-img-player-2')
+  //     .cloneNode(true)
+  //   win_img_player_2.parentNode.replaceChild(
+  //     clonedWin_img_player_2,
+  //     win_img_player_2
+  //   )
+  //   document
+  //     .getElementById('result-img-player-2')
+  //     .classList.add('animate__animated', 'animate__swing')
 
-      win_img_player_2 = document.getElementById('result-img-player-2')
-      clonedWin_img_player_2 = document
-        .getElementById('result-img-player-2')
-        .cloneNode(true)
-      win_img_player_2.parentNode.replaceChild(
-        clonedWin_img_player_2,
-        win_img_player_2
-      )
-      document
-        .getElementById('result-img-player-2')
-        // .classList.add('animate__animated', 'animate__bounceInLeft')
-        .classList.add(
-          'animate__animated',
-          'animate__infinite',
-          'animate__flip'
-        )
+  //   break
+  // case PLAYER_TWO:
+  //   document.getElementById('btn-hold').classList.add('btn--disabled')
+  //   document.getElementById('btn-roll-dices').classList.add('btn--disabled')
+  //   document.getElementById('player-1-dancer').classList.remove('dance')
+  //   document.getElementById('player-2-dancer').classList.remove('dance')
+  //   audio.play()
+  //   music.pause()
+  //   music.currentTime = 0
+  //   winMusic.play()
+  //   document.getElementById('winner-text').innerText = 'Player two win'
+  //   document.getElementById('result-img-player-1').src =
+  //     'images/cat-loose.png'
+  //   document.getElementById('result-img-player-2').src = 'images/win-pig.png'
 
-      document
-        .getElementById('result-img-player-1')
-        // .classList.add('animate__animated', 'animate__bounceInLeft')
-        .classList.add('animate__animated', 'animate__swing')
+  // win_img_player_2 = document.getElementById('win-img-player-2')
 
-      win_img_player_1 = document.getElementById('result-img-player-1')
-      clonedWin_img_player_1 = document
-        .getElementById('result-img-player-1')
-        .cloneNode(true)
-      win_img_player_1.parentNode.replaceChild(
-        clonedWin_img_player_1,
-        win_img_player_1
-      )
-      //   document
-      //     .getElementById('winner-text')
-      //     .classList.add(
-      //       'animate__animated',
-      //       'animate__infinite',
-      //       'animate__rubberBand'
-      //     )
-      break
-  }
+  //   win_img_player_2 = document.getElementById('result-img-player-2')
+  //   clonedWin_img_player_2 = document
+  //     .getElementById('result-img-player-2')
+  //     .cloneNode(true)
+  //   win_img_player_2.parentNode.replaceChild(
+  //     clonedWin_img_player_2,
+  //     win_img_player_2
+  //   )
+  //   document
+  //     .getElementById('result-img-player-2')
+  // .classList.add('animate__animated', 'animate__bounceInLeft')
+  //     .classList.add(
+  //       'animate__animated',
+  //       'animate__infinite',
+  //       'animate__flip'
+  //     )
+
+  //   document
+  //     .getElementById('result-img-player-1')
+  // .classList.add('animate__animated', 'animate__bounceInLeft')
+  //     .classList.add('animate__animated', 'animate__swing')
+
+  //   win_img_player_1 = document.getElementById('result-img-player-1')
+  //   clonedWin_img_player_1 = document
+  //     .getElementById('result-img-player-1')
+  //     .cloneNode(true)
+  //   win_img_player_1.parentNode.replaceChild(
+  //     clonedWin_img_player_1,
+  //     win_img_player_1
+  //   )
+  //   document
+  //     .getElementById('winner-text')
+  //     .classList.add(
+  //       'animate__animated',
+  //       'animate__infinite',
+  //       'animate__rubberBand'
+  //     )
+  //   break
+  //   }
 }
 
 function render(atAction) {
@@ -342,6 +341,165 @@ function render(atAction) {
       break
 
     case 'hold':
+      document.getElementById('btn-hold').classList.add('btn--disabled')
+      document.getElementById('player-1-score').innerText =
+        gameState.pointsOfPlayerOne
+      document.getElementById('player-2-score').innerText =
+        gameState.pointsOfPlayerTwo
+      document.getElementById('player-1-safe-points').innerText = 0
+      document.getElementById('player-1-safe-points').innerText = 0
+
+      //   document.getElementById('result-img-player-1').src = 'images/win-pig.png'
+
+      //   win_img_player_1 = document.getElementById('result-img-player-1')
+      //   clonedWin_img_player_1 = document
+      //     .getElementById('result-img-player-1')
+      //     .cloneNode(true)
+      //   win_img_player_1.parentNode.replaceChild(
+      //     clonedWin_img_player_1,
+      //     win_img_player_1
+      //   )
+
+      //   document
+      //     .getElementById('result-img-player-1')
+      //     .classList.add(
+      //       'animate__animated',
+      //       'animate__infinite',
+      //       'animate__flip'
+      //     )
+
+      //   document.getElementById('result-img-player-2').src =
+      //     'images/cat-loose.png'
+      //   win_img_player_2 = document.getElementById('result-img-player-2')
+      //   clonedWin_img_player_2 = document
+      //     .getElementById('result-img-player-2')
+      //     .cloneNode(true)
+      //   win_img_player_2.parentNode.replaceChild(
+      //     clonedWin_img_player_2,
+      //     win_img_player_2
+      //   )
+      //   document
+      //     .getElementById('result-img-player-2')
+      //     .classList.add('animate__animated', 'animate__swing')
+
+      let win_img_player_1
+      let clonedWin_img_player_1
+      let win_img_player_2
+      let clonedWin_img_player_2
+      switch (gameState.playerWin) {
+        case PLAYER_ONE:
+          document.getElementById('btn-hold').classList.add('btn--disabled')
+          document
+            .getElementById('btn-roll-dices')
+            .classList.add('btn--disabled')
+          document.getElementById('player-1-dancer').classList.remove('dance')
+          document.getElementById('player-2-dancer').classList.remove('dance')
+          //   audio.play()
+          //   music.pause()
+          //   music.currentTime = 0
+          //   winMusic.play()
+
+          //   document.getElementById('winner-text').innerText = 'Player one win'
+          //   document
+          //     .getElementById('winner-text')
+          //     .classList.add(
+          //       'animate__animated',
+          //       'animate__infinite',
+          //       'animate__rubberBand'
+          //     )
+          document.getElementById('result-img-player-1').src =
+            'images/win-pig.png'
+
+          win_img_player_1 = document.getElementById('result-img-player-1')
+          clonedWin_img_player_1 = document
+            .getElementById('result-img-player-1')
+            .cloneNode(true)
+          win_img_player_1.parentNode.replaceChild(
+            clonedWin_img_player_1,
+            win_img_player_1
+          )
+
+          document
+            .getElementById('result-img-player-1')
+            .classList.add(
+              'animate__animated',
+              'animate__infinite',
+              'animate__flip'
+            )
+
+          document.getElementById('result-img-player-2').src =
+            'images/cat-loose.png'
+          win_img_player_2 = document.getElementById('result-img-player-2')
+          clonedWin_img_player_2 = document
+            .getElementById('result-img-player-2')
+            .cloneNode(true)
+          win_img_player_2.parentNode.replaceChild(
+            clonedWin_img_player_2,
+            win_img_player_2
+          )
+          document
+            .getElementById('result-img-player-2')
+            .classList.add('animate__animated', 'animate__swing')
+
+          break
+        case PLAYER_TWO:
+          document.getElementById('btn-hold').classList.add('btn--disabled')
+          document
+            .getElementById('btn-roll-dices')
+            .classList.add('btn--disabled')
+          document.getElementById('player-1-dancer').classList.remove('dance')
+          document.getElementById('player-2-dancer').classList.remove('dance')
+          //   audio.play()
+          //   music.pause()
+          //   music.currentTime = 0
+          //   winMusic.play()
+          //   document.getElementById('winner-text').innerText = 'Player two win'
+          document.getElementById('result-img-player-1').src =
+            'images/cat-loose.png'
+          document.getElementById('result-img-player-2').src =
+            'images/win-pig.png'
+
+          // win_img_player_2 = document.getElementById('win-img-player-2')
+
+          win_img_player_2 = document.getElementById('result-img-player-2')
+          clonedWin_img_player_2 = document
+            .getElementById('result-img-player-2')
+            .cloneNode(true)
+          win_img_player_2.parentNode.replaceChild(
+            clonedWin_img_player_2,
+            win_img_player_2
+          )
+          document
+            .getElementById('result-img-player-2')
+            // .classList.add('animate__animated', 'animate__bounceInLeft')
+            .classList.add(
+              'animate__animated',
+              'animate__infinite',
+              'animate__flip'
+            )
+
+          document
+            .getElementById('result-img-player-1')
+            // .classList.add('animate__animated', 'animate__bounceInLeft')
+            .classList.add('animate__animated', 'animate__swing')
+
+          win_img_player_1 = document.getElementById('result-img-player-1')
+          clonedWin_img_player_1 = document
+            .getElementById('result-img-player-1')
+            .cloneNode(true)
+          win_img_player_1.parentNode.replaceChild(
+            clonedWin_img_player_1,
+            win_img_player_1
+          )
+          //   document
+          //     .getElementById('winner-text')
+          //     .classList.add(
+          //       'animate__animated',
+          //       'animate__infinite',
+          //       'animate__rubberBand'
+          //     )
+          break
+      }
       break
   }
 }
