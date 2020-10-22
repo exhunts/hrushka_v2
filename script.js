@@ -21,20 +21,22 @@ const initGameState = {
   pointsToSafeForPlayerOne: 0,
   pointsToSafeForPlayerTwo: 0,
   playerTurn: PLAYER_ONE,
-  finalScore: 5,
+  finalScore: 25,
   isGamePlaing: false,
   firstDicePoints: 0,
   secondDicePoints: 0,
   playerWin: NONE,
 }
 
-function initGame() {
-  gameState = { ...initGameState, finalScore: gameState.finalScore }
-  render('initgame')
-}
+// function initGame() {
+//   gameState = { ...initGameState, finalScore: gameState.finalScore }
+//   render('initgame')
+// }
 
 function newGame() {
-  initGame()
+  gameState = { ...initGameState, finalScore: gameState.finalScore }
+  render('newgame')
+  //   initGame()
 }
 
 function rollDices() {
@@ -89,144 +91,7 @@ function hold() {
       }
       break
   }
-  //   document.getElementById('btn-hold').classList.add('btn--disabled')
-  //   document.getElementById('player-1-score').innerText =
-  //     gameState.pointsOfPlayerOne
-  //   document.getElementById('player-2-score').innerText =
-  //     gameState.pointsOfPlayerTwo
-  //   document.getElementById('player-1-safe-points').innerText = 0
-  //   document.getElementById('player-1-safe-points').innerText = 0
-
-  //   debugger !!!!
-  //   switch (gameState.playerTurn) {
-  //     case PLAYER_ONE:
-  //       document.getElementById('player-1-dancer').classList.remove('dance')
-  //       document.getElementById('player-2-dancer').classList.remove('dance')
-  //       document.getElementById('player-1-dancer').classList.add('dance')
-  //       break
-  //     case PLAYER_TWO:
-  //       document.getElementById('player-1-dancer').classList.remove('dance')
-  //       document.getElementById('player-2-dancer').classList.remove('dance')
-  //       document.getElementById('player-2-dancer').classList.add('dance')
-  //       break
-  //   }
-  //   debugger !!!!
-
   render('hold')
-
-  //   let win_img_player_1
-  //   let clonedWin_img_player_1
-  //   let win_img_player_2
-  //   let clonedWin_img_player_2
-  //   switch (gameState.playerWin) {
-  //     case PLAYER_ONE:
-  //       document.getElementById('btn-hold').classList.add('btn--disabled')
-  //       document.getElementById('btn-roll-dices').classList.add('btn--disabled')
-  //       document.getElementById('player-1-dancer').classList.remove('dance')
-  //       document.getElementById('player-2-dancer').classList.remove('dance')
-
-  //   audio.play()
-  //   music.pause()
-  //   music.currentTime = 0
-  //   winMusic.play()
-
-  //   document.getElementById('winner-text').innerText = 'Player one win'
-  //   document
-  //     .getElementById('winner-text')
-  //     .classList.add(
-  //       'animate__animated',
-  //       'animate__infinite',
-  //       'animate__rubberBand'
-  //     )
-  //   document.getElementById('result-img-player-1').src = 'images/win-pig.png'
-
-  //   win_img_player_1 = document.getElementById('result-img-player-1')
-  //   clonedWin_img_player_1 = document
-  //     .getElementById('result-img-player-1')
-  //     .cloneNode(true)
-  //   win_img_player_1.parentNode.replaceChild(
-  //     clonedWin_img_player_1,
-  //     win_img_player_1
-  //   )
-
-  //   document
-  //     .getElementById('result-img-player-1')
-  //     .classList.add(
-  //       'animate__animated',
-  //       'animate__infinite',
-  //       'animate__flip'
-  //     )
-
-  //   document.getElementById('result-img-player-2').src =
-  //     'images/cat-loose.png'
-  //   win_img_player_2 = document.getElementById('result-img-player-2')
-  //   clonedWin_img_player_2 = document
-  //     .getElementById('result-img-player-2')
-  //     .cloneNode(true)
-  //   win_img_player_2.parentNode.replaceChild(
-  //     clonedWin_img_player_2,
-  //     win_img_player_2
-  //   )
-  //   document
-  //     .getElementById('result-img-player-2')
-  //     .classList.add('animate__animated', 'animate__swing')
-
-  //   break
-  // case PLAYER_TWO:
-  //   document.getElementById('btn-hold').classList.add('btn--disabled')
-  //   document.getElementById('btn-roll-dices').classList.add('btn--disabled')
-  //   document.getElementById('player-1-dancer').classList.remove('dance')
-  //   document.getElementById('player-2-dancer').classList.remove('dance')
-  //   audio.play()
-  //   music.pause()
-  //   music.currentTime = 0
-  //   winMusic.play()
-  //   document.getElementById('winner-text').innerText = 'Player two win'
-  //   document.getElementById('result-img-player-1').src =
-  //     'images/cat-loose.png'
-  //   document.getElementById('result-img-player-2').src = 'images/win-pig.png'
-
-  // win_img_player_2 = document.getElementById('win-img-player-2')
-
-  //   win_img_player_2 = document.getElementById('result-img-player-2')
-  //   clonedWin_img_player_2 = document
-  //     .getElementById('result-img-player-2')
-  //     .cloneNode(true)
-  //   win_img_player_2.parentNode.replaceChild(
-  //     clonedWin_img_player_2,
-  //     win_img_player_2
-  //   )
-  //   document
-  //     .getElementById('result-img-player-2')
-  // .classList.add('animate__animated', 'animate__bounceInLeft')
-  //     .classList.add(
-  //       'animate__animated',
-  //       'animate__infinite',
-  //       'animate__flip'
-  //     )
-
-  //   document
-  //     .getElementById('result-img-player-1')
-  // .classList.add('animate__animated', 'animate__bounceInLeft')
-  //     .classList.add('animate__animated', 'animate__swing')
-
-  //   win_img_player_1 = document.getElementById('result-img-player-1')
-  //   clonedWin_img_player_1 = document
-  //     .getElementById('result-img-player-1')
-  //     .cloneNode(true)
-  //   win_img_player_1.parentNode.replaceChild(
-  //     clonedWin_img_player_1,
-  //     win_img_player_1
-  //   )
-  //   document
-  //     .getElementById('winner-text')
-  //     .classList.add(
-  //       'animate__animated',
-  //       'animate__infinite',
-  //       'animate__rubberBand'
-  //     )
-  //   break
-  //   }
 }
 
 function render(atAction) {
@@ -248,11 +113,12 @@ function render(atAction) {
         gameState.pointsOfPlayerTwo
       break
 
-    case 'initgame':
+    case 'newgame':
+      document.getElementById('btn-hold').classList.add('btn--disabled')
       document
         .getElementById('btn-roll-dices')
         .classList.remove('btn--disabled')
-      document.getElementById('btn-hold').classList.remove('btn--disabled')
+      //   document.getElementById('btn-hold').classList.remove('btn--disabled')
       document.getElementById('player-1-dancer').classList.add('dance')
       document.getElementById('player-2-dancer').classList.remove('dance')
       document.getElementById('player-1-safe-points').innerText =
@@ -279,14 +145,15 @@ function render(atAction) {
           'animate__flip'
         )
       document.getElementById('result-img-player-2').src = ''
-      //   document.getElementById('winner-text').innerText = ''
-      //   document
-      //     .getElementById('winner-text')
-      //     .classList.remove(
-      //       'animate__animated',
-      //       'animate__infinite',
-      //       'animate__rubberBand'
-      //     )
+      document.getElementById('winner-text').innerText = ''
+      document
+        .getElementById('winner-text')
+        .classList.remove(
+          'animate__animated',
+          'animate__infinite',
+          'animate__rubberBand'
+        )
+
       break
 
     case 'rolldices':
@@ -349,39 +216,6 @@ function render(atAction) {
       document.getElementById('player-1-safe-points').innerText = 0
       document.getElementById('player-1-safe-points').innerText = 0
 
-      //   document.getElementById('result-img-player-1').src = 'images/win-pig.png'
-
-      //   win_img_player_1 = document.getElementById('result-img-player-1')
-      //   clonedWin_img_player_1 = document
-      //     .getElementById('result-img-player-1')
-      //     .cloneNode(true)
-      //   win_img_player_1.parentNode.replaceChild(
-      //     clonedWin_img_player_1,
-      //     win_img_player_1
-      //   )
-
-      //   document
-      //     .getElementById('result-img-player-1')
-      //     .classList.add(
-      //       'animate__animated',
-      //       'animate__infinite',
-      //       'animate__flip'
-      //     )
-
-      //   document.getElementById('result-img-player-2').src =
-      //     'images/cat-loose.png'
-      //   win_img_player_2 = document.getElementById('result-img-player-2')
-      //   clonedWin_img_player_2 = document
-      //     .getElementById('result-img-player-2')
-      //     .cloneNode(true)
-      //   win_img_player_2.parentNode.replaceChild(
-      //     clonedWin_img_player_2,
-      //     win_img_player_2
-      //   )
-      //   document
-      //     .getElementById('result-img-player-2')
-      //     .classList.add('animate__animated', 'animate__swing')
-
       let win_img_player_1
       let clonedWin_img_player_1
       let win_img_player_2
@@ -398,15 +232,15 @@ function render(atAction) {
           //   music.pause()
           //   music.currentTime = 0
           //   winMusic.play()
+          document.getElementById('winner-text').innerText = 'Player one win'
+          document
+            .getElementById('winner-text')
+            .classList.add(
+              'animate__animated',
+              'animate__infinite',
+              'animate__rubberBand'
+            )
 
-          //   document.getElementById('winner-text').innerText = 'Player one win'
-          //   document
-          //     .getElementById('winner-text')
-          //     .classList.add(
-          //       'animate__animated',
-          //       'animate__infinite',
-          //       'animate__rubberBand'
-          //     )
           document.getElementById('result-img-player-1').src =
             'images/win-pig.png'
 
@@ -449,6 +283,14 @@ function render(atAction) {
             .classList.add('btn--disabled')
           document.getElementById('player-1-dancer').classList.remove('dance')
           document.getElementById('player-2-dancer').classList.remove('dance')
+          document.getElementById('winner-text').innerText = 'Player two win'
+          document
+            .getElementById('winner-text')
+            .classList.add(
+              'animate__animated',
+              'animate__infinite',
+              'animate__rubberBand'
+            )
           //   audio.play()
           //   music.pause()
           //   music.currentTime = 0
