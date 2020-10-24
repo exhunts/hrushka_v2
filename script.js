@@ -1,9 +1,24 @@
-let audio_main_music = document.getElementById('audio-main-music')
-let audio_win_music = document.getElementById('audio-win-music')
+// music
+const audio_main_music = document.getElementById('audio-main-music')
+audio_main_music.loop = true
+audio_main_music.volume = 0.2
+const audio_win_music = document.getElementById('audio-win-music')
+audio_win_music.loop = false
+audio_win_music.volume = 1
 
-let dices_sound = document.getElementById('dices-sound')
-let audio_giggle_sound = document.getElementById('audio-giggle-sound')
-let audio_cash_sound = document.getElementById('audio-cash-sound')
+// audio
+const audio_dices_sound = document.getElementById('audio-dices-sound')
+audio_dices_sound.loop = false
+audio_dices_sound.volume = 0.5
+const audio_giggle_sound = document.getElementById('audio-giggle-sound')
+audio_giggle_sound.loop = false
+audio_giggle_sound.volume = 1
+const audio_cash_sound = document.getElementById('audio-cash-sound')
+audio_cash_sound.loop = false
+audio_cash_sound.volume = 1
+const audio_pig_sound = document.getElementById('audio-pig-sound')
+audio_pig_sound.loop = false
+audio_pig_sound.volume = 0.7
 
 const PLAYER_ONE = 1
 const PLAYER_TWO = 2
@@ -15,7 +30,7 @@ let gameState = {
   pointsToSafeForPlayerOne: 0,
   pointsToSafeForPlayerTwo: 0,
   playerTurn: PLAYER_ONE,
-  finalScore: 0,
+  finalScore: 10,
   isGamePlaing: false,
   firstDicePoints: 0,
   secondDicePoints: 0,
@@ -35,8 +50,10 @@ const initGameState = {
   playerWin: NONE,
 }
 
+document.getElementById('win-input').value = gameState.finalScore
+
 function newGame() {
-  gameState = { ...gameState, ...initGameState }
+  gameState = { ...initGameState, finalScore: gameState.finalScore }
   render('newgame')
   playSound('newgame')
 }
@@ -351,63 +368,59 @@ function playSound(atAction) {
     case 'newgame':
       audio_win_music.pause()
       audio_win_music.currentTime = 0
-
-      audio_main_music.loop = true
-      audio_main_music.volume = 0.2
-      // audio_main_music.load()
       audio_main_music.play()
       break
 
     case 'hold':
-      switch (gameState.playerTurn) {
-        case PLAYER_ONE:
-          if (gameState.pointsOfPlayerOne >= gameState.finalScore) {
-            audio_main_music.pause()
-            audio_main_music.currentTime = 0
-
-            audio_win_music.loop = false
-            audio_win_music.volume = 1
-            // audio_win_music.load()
-            audio_win_music.play()
-          }
-          break
-        case PLAYER_TWO:
-          if (gameState.pointsOfPlayerTwo >= gameState.finalScore) {
-            audio_main_music.pause()
-            audio_main_music.currentTime = 0
-
-            audio_win_music.loop = false
-            audio_win_music.volume = 1
-            // audio_win_music.load()
-            audio_win_music.play()
-          }
-          break
+      const isOneOfThePlayersWin =
+        gameState.pointsOfPlayerOne >= gameState.finalScore ||
+        gameState.pointsOfPlayerTwo >= gameState.finalScore
+      if (isOneOfThePlayersWin) {
+        audio_main_music.pause()
+        audio_main_music.currentTime = 0
+        audio_win_music.play()
+        audio_pig_sound.play()
       }
       audio_cash_sound.pause()
       audio_cash_sound.currentTime = 0
-      audio_cash_sound.loop = false
-      audio_cash_sound.volume = 1
-      // audio_cash_sound.load()
       audio_cash_sound.play()
       break
 
     case 'rolldices':
-      dices_sound.loop = false
-      dices_sound.volume = 0.5
-      // dices_sound.load()
-      dices_sound.play()
-      if (gameState.firstDicePoints === 1 || gameState.secondDicePoints === 1) {
+      audio_dices_sound.pause()
+      audio_dices_sound.currentTime = 0
+      audio_dices_sound.play()
+      const isWasDotPoint =
+        gameState.firstDicePoints === 1 || gameState.secondDicePoints === 1
+      if (isWasDotPoint) {
         audio_giggle_sound.pause()
         audio_giggle_sound.currentTime = 0
-        audio_giggle_sound.loop = false
-        audio_giggle_sound.volume = 1
-        // audio_giggle_sound.load()
         audio_giggle_sound.play()
       }
       break
 
     default:
       throw Error(`playSound: switch/case ${atAction} not found`)
+  }
+}
+
+function onWinScoreInput() {
+  // if (document.getElementById('win-input').value === '') {
+  //   gameState.finalScore = 10
+  //   document.getElementById('win-input').value = 10
+  // }
+  gameState.finalScore = +document.getElementById('win-input').value
+
+  // document.getElementById('win-input').value = gameState.finalScore
+
+  // console.log(gameState.finalScore)
+  console.log(typeof document.getElementById('win-input').value)
+}
+
+function onWinScoreInputBlur() {
+  if (document.getElementById('win-input').value === '') {
+    gameState.finalScore = 10
+    document.getElementById('win-input').value = 10
   }
 }
 

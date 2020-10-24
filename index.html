@@ -12,11 +12,11 @@
     <audio id="audio-win-music" preload="auto">
       <source src="sounds/win-music.mp3" type="audio/mp3" />
     </audio>
-    <audio id="dices-sound" preload="auto">
+    <audio id="audio-dices-sound" preload="auto">
       <source src="sounds/dices-sound.mp3" type="audio/mp3" />
     </audio>
     <audio id="audio-pig-sound" preload="auto">
-      <source id="audio-source-pig-sound" src="" type="audio/mp3" />
+      <source src="sounds/pig-sound.mp3" type="audio/mp3" />
     </audio>
     <audio id="audio-giggle-sound" preload="auto">
       <source src="sounds/giggle-sound.mp3" type="audio/mp3" />
@@ -58,11 +58,18 @@
               src="images/tv-win-points.png"
               alt="image"
             />
-            <input class="win-points-input" type="text" placeholder="20" />
+            <input
+              id="win-input"
+              class="win-points-input"
+              oninput="onWinScoreInput()"
+              onblur="onWinScoreInputBlur()"
+              type="text"
+              placeholder="win"
+            />
           </div>
         </div>
         <div class="player-side">
-          <div class="player-name">Player 1</div>
+          <div class="player-name">Player One</div>
           <div id="player-1-score" class="player-score">0</div>
           <img id="result-img-player-1" class="win-pig" src="" alt="" />
           <img
@@ -78,7 +85,7 @@
         </div>
 
         <div class="player-side">
-          <div class="player-name">Player 2</div>
+          <div class="player-name">Player Two</div>
           <div id="player-2-score" class="player-score">0</div>
           <img id="result-img-player-2" class="loose-cat" src="" alt="" />
           <img
