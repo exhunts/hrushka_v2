@@ -167,8 +167,8 @@ body {
   justify-content: center;
   align-items: center;
   background-color: brown;
-  height: 90px;
-  width: 90px;
+  height: 150px;
+  width: 150px;
   border-radius: 50%;
 }
 
@@ -181,7 +181,7 @@ body {
 .player-safe-points {
   color: white;
   font-weight: bolder;
-  font-size: 25px;
+  font-size: 50px;
 }
 
 .dance {
@@ -206,7 +206,7 @@ body {
   src: url(fonts/duncecapbb_reg.ttf);
 }
 
-/* --------------- */
+/* --------------- animate.css --------------- */
 :root {
   --animate-duration: 1s;
   --animate-delay: 1s;

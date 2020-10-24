@@ -3,16 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="user-scalable=yes" />
-    <link rel="shortcut icon" type="image/png" href="images/pig-nose.png" />
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png" />
     <link rel="stylesheet" href="styles.css" />
     <title>Hrushka-final</title>
-    <audio id="audio" preload="auto">
-      <source id="audio-source" src="" type="audio/mp3" />
-      <!-- <source src="sounds/win-music.mp3" type="audio/mp3" />
-      <source src="sounds/pig-sound.mp3" type="audio/mp3" />
-      <source src="sounds/giggle.mp3" type="audio/mp3" />
-      <source src="sounds/dices.mp3" type="audio/mp3" />
-      <source src="sounds/cash.mp3" type="audio/mp3" /> -->
+    <audio id="audio-main-music" preload="auto">
+      <source src="sounds/main-music.mp3" type="audio/mp3" />
+    </audio>
+    <audio id="audio-win-music" preload="auto">
+      <source src="sounds/win-music.mp3" type="audio/mp3" />
+    </audio>
+    <audio id="dices-sound" preload="auto">
+      <source src="sounds/dices-sound.mp3" type="audio/mp3" />
+    </audio>
+    <audio id="audio-pig-sound" preload="auto">
+      <source id="audio-source-pig-sound" src="" type="audio/mp3" />
+    </audio>
+    <audio id="audio-giggle-sound" preload="auto">
+      <source src="sounds/giggle-sound.mp3" type="audio/mp3" />
+    </audio>
+    <audio id="audio-cash-sound" preload="auto">
+      <source src="sounds/cash-sound.mp3" type="audio/mp3" />
     </audio>
   </head>
   <body>
@@ -81,6 +91,7 @@
             <div class="player-safe-text">safe</div>
             <div id="player-2-safe-points" class="player-safe-points">0</div>
           </div>
+          <!-- <img style="height: 150px" src="images/pngegg.png" alt="" /> -->
         </div>
       </div>
     </div>
