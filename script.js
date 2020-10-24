@@ -54,6 +54,7 @@ document.getElementById('win-input').value = gameState.finalScore
 
 function newGame() {
   gameState = { ...initGameState, finalScore: gameState.finalScore }
+  gameState.isGamePlaing = true
   render('newgame')
   playSound('newgame')
 }
@@ -137,6 +138,40 @@ function render(atAction) {
     //   break
 
     case 'newgame':
+      document.getElementById('first-player-name').innerText = 'first'
+      document.getElementById('second-player-name').innerText = 'second'
+
+      let first_player_name = document.getElementById('first-player-name')
+      clonedWin_first_player_name = document
+        .getElementById('first-player-name')
+        .cloneNode(true)
+
+      clonedWin_first_player_name.classList.remove(
+        'animate__animated',
+        'animate__infinite',
+        'animate__rubberBand'
+      )
+
+      first_player_name.parentNode.replaceChild(
+        clonedWin_first_player_name,
+        first_player_name
+      )
+
+      let second_player_name = document.getElementById('second-player-name')
+      clonedWin_second_player_name = document
+        .getElementById('second-player-name')
+        .cloneNode(true)
+      clonedWin_second_player_name.classList.remove(
+        'animate__animated',
+        'animate__infinite',
+        'animate__rubberBand'
+      )
+      second_player_name.parentNode.replaceChild(
+        clonedWin_second_player_name,
+        second_player_name
+      )
+      //>>>
+
       document.getElementById('btn-hold').classList.add('btn--disabled')
       document
         .getElementById('btn-roll-dices')
@@ -167,14 +202,14 @@ function render(atAction) {
           'animate__flip'
         )
       document.getElementById('result-img-player-2').src = ''
-      document.getElementById('winner-text').innerText = ''
-      document
-        .getElementById('winner-text')
-        .classList.remove(
-          'animate__animated',
-          'animate__infinite',
-          'animate__rubberBand'
-        )
+      // document.getElementById('winner-text').innerText = ''
+      // document
+      //   .getElementById('winner-text')
+      //   .classList.remove(
+      //     'animate__animated',
+      //     'animate__infinite',
+      //     'animate__rubberBand'
+      //   )
       break
 
     case 'rolldices':
@@ -254,20 +289,31 @@ function render(atAction) {
       let clonedWin_img_player_2
       switch (gameState.playerWin) {
         case PLAYER_ONE:
+          document.getElementById('first-player-name').innerText = 'win'
+          document.getElementById('second-player-name').innerText = 'loose'
+          document
+            .getElementById('first-player-name')
+            .classList.add(
+              'animate__animated',
+              'animate__infinite',
+              'animate__rubberBand'
+            )
+          // document.getElementById('second-player-name')
+
           document.getElementById('btn-hold').classList.add('btn--disabled')
           document
             .getElementById('btn-roll-dices')
             .classList.add('btn--disabled')
           document.getElementById('player-1-dancer').classList.remove('dance')
           document.getElementById('player-2-dancer').classList.remove('dance')
-          document.getElementById('winner-text').innerText = 'Player one win'
-          document
-            .getElementById('winner-text')
-            .classList.add(
-              'animate__animated',
-              'animate__infinite',
-              'animate__rubberBand'
-            )
+          // document.getElementById('winner-text').innerText = 'Player one win'
+          // document
+          //   .getElementById('winner-text')
+          //   .classList.add(
+          //     'animate__animated',
+          //     'animate__infinite',
+          //     'animate__rubberBand'
+          //   )
 
           document.getElementById('result-img-player-1').src =
             'images/win-pig.png'
@@ -305,20 +351,29 @@ function render(atAction) {
           break
 
         case PLAYER_TWO:
+          document.getElementById('first-player-name').innerText = 'loose'
+          document.getElementById('second-player-name').innerText = 'win'
+          document
+            .getElementById('second-player-name')
+            .classList.add(
+              'animate__animated',
+              'animate__infinite',
+              'animate__rubberBand'
+            )
           document.getElementById('btn-hold').classList.add('btn--disabled')
           document
             .getElementById('btn-roll-dices')
             .classList.add('btn--disabled')
           document.getElementById('player-1-dancer').classList.remove('dance')
           document.getElementById('player-2-dancer').classList.remove('dance')
-          document.getElementById('winner-text').innerText = 'Player two win'
-          document
-            .getElementById('winner-text')
-            .classList.add(
-              'animate__animated',
-              'animate__infinite',
-              'animate__rubberBand'
-            )
+          // document.getElementById('winner-text').innerText = 'Player two win'
+          // document
+          //   .getElementById('winner-text')
+          //   .classList.add(
+          //     'animate__animated',
+          //     'animate__infinite',
+          //     'animate__rubberBand'
+          //   )
           document.getElementById('result-img-player-1').src =
             'images/cat-loose.png'
           document.getElementById('result-img-player-2').src =
@@ -360,6 +415,8 @@ function render(atAction) {
           break
       }
       break
+    // default:
+    //   throw Error(`render: switch/case ${atAction} not found`)
   }
 }
 
@@ -405,25 +462,48 @@ function playSound(atAction) {
 }
 
 function onWinScoreInput() {
-  // if (document.getElementById('win-input').value === '') {
-  //   gameState.finalScore = 10
-  //   document.getElementById('win-input').value = 10
-  // }
   gameState.finalScore = +document.getElementById('win-input').value
-
-  // document.getElementById('win-input').value = gameState.finalScore
-
-  // console.log(gameState.finalScore)
-  console.log(typeof document.getElementById('win-input').value)
+  if (+document.getElementById('win-input').value > 9999) {
+    document.getElementById('win-input').value = 9999
+    gameState.finalScore = 9999
+  }
 }
 
 function onWinScoreInputBlur() {
   if (document.getElementById('win-input').value === '') {
     gameState.finalScore = 10
-    document.getElementById('win-input').value = 10
   }
+}
+
+//!!!
+function remountComponent(id) {
+  let component = document.getElementById(id)
+  let cloned = document.getElementById(id).cloneNode(true)
+  component.parentNode.replaceChild(cloned, component)
 }
 
 function getRandomDicePoints() {
   return Math.floor(Math.random() * 6) + 1
 }
+
+document.addEventListener('keydown', event => {
+  if (!gameState.isGamePlaing && event.code === 'Enter') {
+    newGame()
+  }
+  if (gameState.isGamePlaing) {
+    if (event.code === 'KeyQ' && gameState.playerTurn === PLAYER_ONE) {
+      rollDices()
+    }
+    if (event.code === 'KeyP' && gameState.playerTurn === PLAYER_TWO) {
+      rollDices()
+    }
+    if (
+      event.code === 'Space' &&
+      (gameState.pointsToSafeForPlayerOne !== 0 ||
+        gameState.pointsToSafeForPlayerTwo !== 0)
+    ) {
+      event.preventDefault()
+      hold()
+    }
+  }
+})
