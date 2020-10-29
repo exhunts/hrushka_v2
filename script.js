@@ -420,13 +420,6 @@ function onWinScoreInputBlur() {
   }
 }
 
-//!!!
-function remountComponent(id) {
-  let component = document.getElementById(id)
-  let cloned = document.getElementById(id).cloneNode(true)
-  component.parentNode.replaceChild(cloned, component)
-}
-
 function rollDice() {
   return getRandomIntFromTo(1, 6)
 }
