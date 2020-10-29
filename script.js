@@ -439,6 +439,12 @@ function getRandomIntFromTo(from, to) {
   return from + Math.floor(Math.random() * (to - from + 1))
 }
 
+function remountCloneNodeWithoutClasses(none, ...classes) {
+  const clonedNode = node.cloneNode(true)
+  clonedNode.classList.remove(...classes)
+  node.parentNode.replaceChild(clonedNode, node)
+}
+
 document.addEventListener('keydown', event => {
   if (!gameState.isGamePlaing && event.code === 'Enter') {
     newGame()
