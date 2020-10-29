@@ -24,6 +24,7 @@ audio_pig_sound.volume = 0.7
 const PLAYER_ONE = 1
 const PLAYER_TWO = 2
 const NONE = 0
+const MAX_FINAL_SCORE = 9999
 
 let gameState = {
   pointsOfPlayerOne: 0,
@@ -412,9 +413,9 @@ function playSound(atAction) {
 // other
 function onWinScoreInput() {
   gameState.finalScore = +document.getElementById('win-input').value
-  if (+document.getElementById('win-input').value > 9999) {
-    document.getElementById('win-input').value = 9999
-    gameState.finalScore = 9999
+  if (+document.getElementById('win-input').value > MAX_FINAL_SCORE) {
+    document.getElementById('win-input').value = MAX_FINAL_SCORE
+    gameState.finalScore = MAX_FINAL_SCORE
   }
 }
 
