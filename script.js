@@ -51,20 +51,6 @@ const initGameState = {
   playerWin: NONE,
 }
 
-document.getElementById('win-input').value = gameState.finalScore
-
-setTimeout(() => {
-  document.querySelector('.intro-logo').classList.add('intro-logo--remove')
-}, 4000)
-
-function onAbout() {
-  document.querySelector('.about-pop-up').classList.add('about-pop-up--show')
-}
-
-function hideAbout() {
-  document.querySelector('.about-pop-up').classList.remove('about-pop-up--show')
-}
-
 function newGame() {
   gameState = { ...initGameState, finalScore: gameState.finalScore }
   gameState.isGamePlaing = true
@@ -476,3 +462,17 @@ document.addEventListener('keydown', event => {
     }
   }
 })
+
+document.getElementById('win-input').value = gameState.finalScore
+
+setTimeout(() => {
+  document.querySelector('.intro-logo').classList.add('intro-logo--remove')
+}, 4000)
+
+function onAbout() {
+  document.querySelector('.about-pop-up').classList.add('about-pop-up--show')
+}
+
+function hideAbout() {
+  document.querySelector('.about-pop-up').classList.remove('about-pop-up--show')
+}
