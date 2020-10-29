@@ -26,6 +26,7 @@ const PLAYER_TWO = 2
 const NONE = 0
 const MAX_FINAL_SCORE = 9999
 
+// main state
 let gameState = {
   pointsOfPlayerOne: 0,
   pointsOfPlayerTwo: 0,
@@ -39,6 +40,7 @@ let gameState = {
   playerWin: NONE,
 }
 
+//state initializer
 const initGameState = {
   pointsOfPlayerOne: 0,
   pointsOfPlayerTwo: 0,
@@ -125,34 +127,37 @@ function render(atAction) {
     case 'newgame':
       document.getElementById('first-player-name').innerText = 'first'
       document.getElementById('second-player-name').innerText = 'second'
-
-      let first_player_name = document.getElementById('first-player-name')
-      clonedWin_first_player_name = document
+      document
         .getElementById('first-player-name')
-        .cloneNode(true)
-      clonedWin_first_player_name.classList.remove(
-        'animate__animated',
-        'animate__infinite',
-        'animate__rubberBand'
-      )
-      first_player_name.parentNode.replaceChild(
-        clonedWin_first_player_name,
-        first_player_name
-      )
+        .classList.remove(
+          'animate__animated',
+          'animate__infinite',
+          'animate__rubberBand'
+        )
 
-      let second_player_name = document.getElementById('second-player-name')
-      clonedWin_second_player_name = document
+      document
         .getElementById('second-player-name')
-        .cloneNode(true)
-      clonedWin_second_player_name.classList.remove(
-        'animate__animated',
-        'animate__infinite',
-        'animate__rubberBand'
-      )
-      second_player_name.parentNode.replaceChild(
-        clonedWin_second_player_name,
-        second_player_name
-      )
+        .classList.remove(
+          'animate__animated',
+          'animate__infinite',
+          'animate__rubberBand'
+        )
+      document.getElementById('result-img-player-1').src = ''
+      document.getElementById('result-img-player-2').src = ''
+      document
+        .getElementById('result-img-player-1')
+        .classList.remove(
+          'animate__animated',
+          'animate__infinite',
+          'animate__flip'
+        )
+      document
+        .getElementById('result-img-player-2')
+        .classList.remove(
+          'animate__animated',
+          'animate__infinite',
+          'animate__flip'
+        )
 
       document.getElementById('btn-hold').classList.add('btn--disabled')
       document
@@ -168,22 +173,7 @@ function render(atAction) {
         gameState.pointsOfPlayerOne
       document.getElementById('player-2-score').innerText =
         gameState.pointsOfPlayerTwo
-      document.getElementById('result-img-player-1').src = ''
-      document
-        .getElementById('result-img-player-1')
-        .classList.remove(
-          'animate__animated',
-          'animate__infinite',
-          'animate__flip'
-        )
-      document
-        .getElementById('result-img-player-2')
-        .classList.remove(
-          'animate__animated',
-          'animate__infinite',
-          'animate__flip'
-        )
-      document.getElementById('result-img-player-2').src = ''
+
       break
 
     case 'rolldices':
