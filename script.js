@@ -173,7 +173,6 @@ function render(atAction) {
         gameState.pointsOfPlayerOne
       document.getElementById('player-2-score').innerText =
         gameState.pointsOfPlayerTwo
-
       break
 
     case 'rolldices':
@@ -213,13 +212,8 @@ function render(atAction) {
           document.getElementById('player-2-dancer').classList.add('dance')
           break
       }
-      const dice_1 = document.getElementById('dice-1')
-      const clonedDice_1 = document.getElementById('dice-1').cloneNode(true)
-      dice_1.parentNode.replaceChild(clonedDice_1, dice_1)
-
-      const dice_2 = document.getElementById('dice-2')
-      const clonedDice_2 = document.getElementById('dice-2').cloneNode(true)
-      dice_2.parentNode.replaceChild(clonedDice_2, dice_2)
+      remountNodeByCloned(document.getElementById('dice-1'))
+      remountNodeByCloned(document.getElementById('dice-2'))
       break
 
     default:
@@ -247,14 +241,9 @@ function render(atAction) {
           break
       }
 
-      let win_img_player_1
-      let clonedWin_img_player_1
-      let win_img_player_2
-      let clonedWin_img_player_2
       switch (gameState.playerWin) {
         case PLAYER_ONE:
           document.getElementById('first-player-name').innerText = 'win'
-          document.getElementById('second-player-name').innerText = 'loose'
           document
             .getElementById('first-player-name')
             .classList.add(
@@ -262,24 +251,11 @@ function render(atAction) {
               'animate__infinite',
               'animate__rubberBand'
             )
-          document.getElementById('btn-hold').classList.add('btn--disabled')
-          document
-            .getElementById('btn-roll-dices')
-            .classList.add('btn--disabled')
+          document.getElementById('second-player-name').innerText = 'loose'
           document.getElementById('player-1-dancer').classList.remove('dance')
           document.getElementById('player-2-dancer').classList.remove('dance')
           document.getElementById('result-img-player-1').src =
             'images/win-pig.png'
-
-          win_img_player_1 = document.getElementById('result-img-player-1')
-          clonedWin_img_player_1 = document
-            .getElementById('result-img-player-1')
-            .cloneNode(true)
-          win_img_player_1.parentNode.replaceChild(
-            clonedWin_img_player_1,
-            win_img_player_1
-          )
-
           document
             .getElementById('result-img-player-1')
             .classList.add(
@@ -287,20 +263,15 @@ function render(atAction) {
               'animate__infinite',
               'animate__flip'
             )
-
           document.getElementById('result-img-player-2').src =
             'images/cat-loose.png'
-          win_img_player_2 = document.getElementById('result-img-player-2')
-          clonedWin_img_player_2 = document
-            .getElementById('result-img-player-2')
-            .cloneNode(true)
-          win_img_player_2.parentNode.replaceChild(
-            clonedWin_img_player_2,
-            win_img_player_2
-          )
           document
             .getElementById('result-img-player-2')
             .classList.add('animate__animated', 'animate__swing')
+          document.getElementById('btn-hold').classList.add('btn--disabled')
+          document
+            .getElementById('btn-roll-dices')
+            .classList.add('btn--disabled')
           break
 
         case PLAYER_TWO:
@@ -313,24 +284,19 @@ function render(atAction) {
               'animate__infinite',
               'animate__rubberBand'
             )
+          document.getElementById('player-1-dancer').classList.remove('dance')
+          document.getElementById('player-2-dancer').classList.remove('dance')
           document.getElementById('btn-hold').classList.add('btn--disabled')
           document
             .getElementById('btn-roll-dices')
             .classList.add('btn--disabled')
-          document.getElementById('player-1-dancer').classList.remove('dance')
-          document.getElementById('player-2-dancer').classList.remove('dance')
           document.getElementById('result-img-player-1').src =
             'images/cat-loose.png'
+          document
+            .getElementById('result-img-player-1')
+            .classList.add('animate__animated', 'animate__swing')
           document.getElementById('result-img-player-2').src =
             'images/win-pig.png'
-          win_img_player_2 = document.getElementById('result-img-player-2')
-          clonedWin_img_player_2 = document
-            .getElementById('result-img-player-2')
-            .cloneNode(true)
-          win_img_player_2.parentNode.replaceChild(
-            clonedWin_img_player_2,
-            win_img_player_2
-          )
           document
             .getElementById('result-img-player-2')
             .classList.add(
@@ -338,18 +304,6 @@ function render(atAction) {
               'animate__infinite',
               'animate__flip'
             )
-          document
-            .getElementById('result-img-player-1')
-            .classList.add('animate__animated', 'animate__swing')
-
-          win_img_player_1 = document.getElementById('result-img-player-1')
-          clonedWin_img_player_1 = document
-            .getElementById('result-img-player-1')
-            .cloneNode(true)
-          win_img_player_1.parentNode.replaceChild(
-            clonedWin_img_player_1,
-            win_img_player_1
-          )
           break
       }
       break
@@ -427,9 +381,15 @@ function getRandomIntFromTo(from, to) {
   return from + Math.floor(Math.random() * (to - from + 1))
 }
 
+// !!! not used
 function remountCloneNodeWithoutClasses(none, ...classes) {
   const clonedNode = node.cloneNode(true)
   clonedNode.classList.remove(...classes)
+  node.parentNode.replaceChild(clonedNode, node)
+}
+
+function remountNodeByCloned(node) {
+  const clonedNode = node.cloneNode(true)
   node.parentNode.replaceChild(clonedNode, node)
 }
 
