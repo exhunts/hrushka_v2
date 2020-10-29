@@ -73,8 +73,8 @@ function newGame() {
 }
 
 function rollDices() {
-  gameState.firstDicePoints = getRandomDicePoints()
-  gameState.secondDicePoints = getRandomDicePoints()
+  gameState.firstDicePoints = rollDice()
+  gameState.secondDicePoints = rollDice()
   const isWasDotPoint =
     gameState.firstDicePoints === 1 || gameState.secondDicePoints === 1
   if (isWasDotPoint) {
@@ -439,10 +439,6 @@ function remountComponent(id) {
   let component = document.getElementById(id)
   let cloned = document.getElementById(id).cloneNode(true)
   component.parentNode.replaceChild(cloned, component)
-}
-
-function getRandomDicePoints() {
-  return Math.floor(Math.random() * 6) + 1
 }
 
 function rollDice() {
