@@ -20,6 +20,7 @@ const audio_pig_sound = document.getElementById('audio-pig-sound')
 audio_pig_sound.loop = false
 audio_pig_sound.volume = 0.7
 
+// consts
 const PLAYER_ONE = 1
 const PLAYER_TWO = 2
 const NONE = 0
@@ -51,6 +52,18 @@ const initGameState = {
 }
 
 document.getElementById('win-input').value = gameState.finalScore
+
+setTimeout(() => {
+  document.querySelector('.intro-logo').classList.add('intro-logo--remove')
+}, 4000)
+
+function onAbout() {
+  document.querySelector('.about-pop-up').classList.add('about-pop-up--show')
+}
+
+function hideAbout() {
+  document.querySelector('.about-pop-up').classList.remove('about-pop-up--show')
+}
 
 function newGame() {
   gameState = { ...initGameState, finalScore: gameState.finalScore }
@@ -120,23 +133,6 @@ function hold() {
 
 function render(atAction) {
   switch (atAction) {
-    // case 'newstate':
-    //   document
-    //     .getElementById('btn-roll-dices')
-    //     .classList.remove('btn--disabled')
-    //   document.getElementById('btn-hold').classList.remove('btn--disabled')
-    //   document.getElementById('player-1-dancer').classList.add('dance')
-    //   document.getElementById('player-2-dancer').classList.remove('dance')
-    //   document.getElementById('player-1-safe-points').innerText =
-    //     gameState.pointsToSafeForPlayerOne
-    //   document.getElementById('player-2-safe-points').innerText =
-    //     gameState.pointsToSafeForPlayerTwo
-    //   document.getElementById('player-1-score').innerText =
-    //     gameState.pointsOfPlayerOne
-    //   document.getElementById('player-2-score').innerText =
-    //     gameState.pointsOfPlayerTwo
-    //   break
-
     case 'newgame':
       document.getElementById('first-player-name').innerText = 'first'
       document.getElementById('second-player-name').innerText = 'second'
@@ -145,13 +141,11 @@ function render(atAction) {
       clonedWin_first_player_name = document
         .getElementById('first-player-name')
         .cloneNode(true)
-
       clonedWin_first_player_name.classList.remove(
         'animate__animated',
         'animate__infinite',
         'animate__rubberBand'
       )
-
       first_player_name.parentNode.replaceChild(
         clonedWin_first_player_name,
         first_player_name
@@ -170,7 +164,6 @@ function render(atAction) {
         clonedWin_second_player_name,
         second_player_name
       )
-      //>>>
 
       document.getElementById('btn-hold').classList.add('btn--disabled')
       document
@@ -202,14 +195,6 @@ function render(atAction) {
           'animate__flip'
         )
       document.getElementById('result-img-player-2').src = ''
-      // document.getElementById('winner-text').innerText = ''
-      // document
-      //   .getElementById('winner-text')
-      //   .classList.remove(
-      //     'animate__animated',
-      //     'animate__infinite',
-      //     'animate__rubberBand'
-      //   )
       break
 
     case 'rolldices':
@@ -298,23 +283,12 @@ function render(atAction) {
               'animate__infinite',
               'animate__rubberBand'
             )
-          // document.getElementById('second-player-name')
-
           document.getElementById('btn-hold').classList.add('btn--disabled')
           document
             .getElementById('btn-roll-dices')
             .classList.add('btn--disabled')
           document.getElementById('player-1-dancer').classList.remove('dance')
           document.getElementById('player-2-dancer').classList.remove('dance')
-          // document.getElementById('winner-text').innerText = 'Player one win'
-          // document
-          //   .getElementById('winner-text')
-          //   .classList.add(
-          //     'animate__animated',
-          //     'animate__infinite',
-          //     'animate__rubberBand'
-          //   )
-
           document.getElementById('result-img-player-1').src =
             'images/win-pig.png'
 
@@ -366,14 +340,6 @@ function render(atAction) {
             .classList.add('btn--disabled')
           document.getElementById('player-1-dancer').classList.remove('dance')
           document.getElementById('player-2-dancer').classList.remove('dance')
-          // document.getElementById('winner-text').innerText = 'Player two win'
-          // document
-          //   .getElementById('winner-text')
-          //   .classList.add(
-          //     'animate__animated',
-          //     'animate__infinite',
-          //     'animate__rubberBand'
-          //   )
           document.getElementById('result-img-player-1').src =
             'images/cat-loose.png'
           document.getElementById('result-img-player-2').src =
@@ -405,13 +371,6 @@ function render(atAction) {
             clonedWin_img_player_1,
             win_img_player_1
           )
-          //   document
-          //     .getElementById('winner-text')
-          //     .classList.add(
-          //       'animate__animated',
-          //       'animate__infinite',
-          //       'animate__rubberBand'
-          //     )
           break
       }
       break
@@ -486,6 +445,10 @@ function getRandomDicePoints() {
   return Math.floor(Math.random() * 6) + 1
 }
 
+function getIntFromTo(from, to) {
+  return from + Math.floor(Math.random() * (to - from + 1))
+}
+
 document.addEventListener('keydown', event => {
   if (!gameState.isGamePlaing && event.code === 'Enter') {
     newGame()
@@ -497,6 +460,8 @@ document.addEventListener('keydown', event => {
     if (event.code === 'KeyP' && gameState.playerTurn === PLAYER_TWO) {
       rollDices()
     }
+    //  e.key === ' '
+    // ' ' is standard, 'Spacebar' was used by IE9 and Firefox < 37
     if (
       event.code === 'Space' &&
       (gameState.pointsToSafeForPlayerOne !== 0 ||

@@ -21,6 +21,160 @@ body {
   font-family: duncecapbb_reg;
 }
 
+.about-pop-up {
+  height: 0vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.788);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  /* transition: all 0.5s ease-out; */
+  display: none;
+}
+
+.about-pop-up--show {
+  /* transition: all 0.5s ease-out; */
+  height: 100vh;
+  display: block;
+}
+
+/* logo */
+.intro-logo {
+  position: absolute;
+  background-color: white;
+  height: 100vh;
+  width: 100%;
+  /* position: absolute; */
+  z-index: 5;
+  animation: intro-logo 4s;
+  opacity: 0;
+}
+
+.intro-logo--remove {
+  display: none;
+}
+
+@keyframes intro-logo {
+  0% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.big-rect {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-origin: 0 0;
+  transform: rotate(45deg) translate(-50%, -50%);
+  background-color: #959fff;
+  height: 350px;
+  width: 350px;
+  animation: big-rect 4s ease-out;
+}
+
+.middle-rect {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 247px;
+  width: 247px;
+  left: 50%;
+  top: 50%;
+  transform-origin: 0 0;
+  transform: translate(-50%, -50%);
+  background-color: #b8c0ff;
+  animation: middle-rect 4s ease-out;
+
+  /* transform: rotate(45deg); */
+  /* transform-origin: unset; */
+}
+
+.little-rect {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 174px;
+  width: 174px;
+  left: 50%;
+  top: 50%;
+  transform-origin: 0 0;
+  transform: rotate(45deg) translate(-50%, -50%);
+  background-color: #e8eaff;
+  animation: little-rect 4s ease-out;
+
+  /* transform: rotate(45deg); */
+  /* transform-origin: unset; */
+}
+
+@keyframes big-rect {
+  0% {
+    /* opacity: 0; */
+    transform: rotate(0deg) translate(-50%, -50%);
+  }
+  50% {
+    /* opacity: 1; */
+    transform: rotate(45deg) translate(-50%, -50%);
+  }
+  100% {
+    /* opacity: 1; */
+    transform: rotate(45deg) translate(-50%, -50%);
+  }
+}
+
+@keyframes middle-rect {
+  0% {
+    /* opacity: 0; */
+    transform: rotate(45deg) translate(-50%, -50%);
+  }
+  50% {
+    /* opacity: 1; */
+    transform: rotate(0deg) translate(-50%, -50%);
+  }
+  100% {
+    /* opacity: 1; */
+    transform: rotate(0deg) translate(-50%, -50%);
+  }
+}
+
+@keyframes little-rect {
+  0% {
+    /* opacity: 0; */
+    transform: rotate(0deg) translate(-50%, -50%);
+  }
+  50% {
+    /* opacity: 1; */
+    transform: rotate(45deg) translate(-50%, -50%);
+  }
+  100% {
+    /* opacity: 1; */
+    transform: rotate(45deg) translate(-50%, -50%);
+  }
+}
+
+.about {
+  position: absolute;
+  background-color: rgb(165, 64, 224);
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: duncecapbb_reg;
+  font-size: 40px;
+  color: white;
+  right: 15px;
+  top: 15px;
+  cursor: pointer;
+}
+
 .container {
   background-image: linear-gradient(
       rgba(62, 20, 20, 0.4),
@@ -55,6 +209,12 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  /* transform-style: preserve-3d; */
+  /* transform: translateZ(0); */
+  /* transform: scale(1); */
+}
+.test {
+  backface-visibility: hidden;
 }
 
 .btn {
@@ -73,6 +233,7 @@ body {
   transition: 0.3s;
   font-family: duncecapbb_reg;
   cursor: pointer;
+  backface-visibility: hidden;
 }
 
 .btn--disabled {
@@ -83,6 +244,8 @@ body {
 .btn:hover {
   transform: scale(1.5);
   transition: 0.3s;
+  /* backface-visibility: hidden; */
+
   /* width: 380px; */
 }
 
@@ -202,9 +365,15 @@ body {
   width: 200px;
 }
 
+/* fonts */
 @font-face {
   font-family: duncecapbb_reg;
   src: url(fonts/duncecapbb_reg.ttf);
+}
+
+@font-face {
+  font-family: Lato-Light;
+  src: url(fonts/Lato-Light.ttf);
 }
 
 /* --------------- animate.css --------------- */
