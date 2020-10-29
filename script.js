@@ -51,6 +51,7 @@ const initGameState = {
   playerWin: NONE,
 }
 
+// logic
 function newGame() {
   gameState = { ...initGameState, finalScore: gameState.finalScore }
   gameState.isGamePlaing = true
@@ -117,6 +118,7 @@ function hold() {
   playSound('hold')
 }
 
+// renderer
 function render(atAction) {
   switch (atAction) {
     case 'newgame':
@@ -365,6 +367,7 @@ function render(atAction) {
   }
 }
 
+// sound
 function playSound(atAction) {
   switch (atAction) {
     case 'newgame':
@@ -406,6 +409,7 @@ function playSound(atAction) {
   }
 }
 
+// other
 function onWinScoreInput() {
   gameState.finalScore = +document.getElementById('win-input').value
   if (+document.getElementById('win-input').value > 9999) {
