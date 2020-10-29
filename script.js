@@ -445,7 +445,15 @@ function getRandomDicePoints() {
   return Math.floor(Math.random() * 6) + 1
 }
 
-function getIntFromTo(from, to) {
+function rollDice() {
+  return getRandomIntFromTo(1, 6)
+}
+
+function getRandomPlayerTurn() {
+  return getRandomIntFromTo(1, 2)
+}
+
+function getRandomIntFromTo(from, to) {
   return from + Math.floor(Math.random() * (to - from + 1))
 }
 
