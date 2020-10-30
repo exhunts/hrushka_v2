@@ -55,14 +55,14 @@ const initGameState = {
 }
 
 // logic
-function newGame() {
+const newGame = () => {
   gameState = { ...initGameState, finalScore: gameState.finalScore }
   gameState.isGamePlaing = true
   render('newgame')
   playSound('newgame')
 }
 
-function rollDices() {
+const rollDices = () => {
   gameState.firstDicePoints = rollDice()
   gameState.secondDicePoints = rollDice()
   const isWasDotPoint =
@@ -94,7 +94,7 @@ function rollDices() {
   playSound('rolldices')
 }
 
-function hold() {
+const hold = () => {
   switch (gameState.playerTurn) {
     case PLAYER_ONE:
       gameState.pointsOfPlayerOne += gameState.pointsToSafeForPlayerOne
@@ -122,7 +122,7 @@ function hold() {
 }
 
 // renderer
-function render(atAction) {
+const render = atAction => {
   switch (atAction) {
     case 'newgame':
       document.getElementById('first-player-name').innerText = 'first'
@@ -134,7 +134,6 @@ function render(atAction) {
           'animate__infinite',
           'animate__rubberBand'
         )
-
       document
         .getElementById('second-player-name')
         .classList.remove(
@@ -214,9 +213,6 @@ function render(atAction) {
       }
       remountNodeByCloned(document.getElementById('dice-1'))
       remountNodeByCloned(document.getElementById('dice-2'))
-      break
-
-    default:
       break
 
     case 'hold':
@@ -307,13 +303,13 @@ function render(atAction) {
           break
       }
       break
-    // default:
-    //   throw Error(`render: switch/case ${atAction} not found`)
+    default:
+      throw Error(`render: switch/case ${atAction} not found`)
   }
 }
 
 // sound
-function playSound(atAction) {
+const playSound = atAction => {
   switch (atAction) {
     case 'newgame':
       audio_win_music.pause()
@@ -355,7 +351,7 @@ function playSound(atAction) {
 }
 
 // other
-function onWinScoreInput() {
+const onWinScoreInput = () => {
   gameState.finalScore = +document.getElementById('win-input').value
   if (+document.getElementById('win-input').value > MAX_FINAL_SCORE) {
     document.getElementById('win-input').value = MAX_FINAL_SCORE
@@ -363,32 +359,32 @@ function onWinScoreInput() {
   }
 }
 
-function onWinScoreInputBlur() {
+const onWinScoreInputBlur = () => {
   if (document.getElementById('win-input').value === '') {
     gameState.finalScore = 10
   }
 }
 
-function rollDice() {
+const rollDice = () => {
   return getRandomIntFromTo(1, 6)
 }
 
-function getRandomPlayerTurn() {
+const getRandomPlayerTurn = () => {
   return getRandomIntFromTo(1, 2)
 }
 
-function getRandomIntFromTo(from, to) {
+const getRandomIntFromTo = (from, to) => {
   return from + Math.floor(Math.random() * (to - from + 1))
 }
 
-// !!! not used
+// !!! not used but don't delete it
 function remountCloneNodeWithoutClasses(none, ...classes) {
   const clonedNode = node.cloneNode(true)
   clonedNode.classList.remove(...classes)
   node.parentNode.replaceChild(clonedNode, node)
 }
 
-function remountNodeByCloned(node) {
+const remountNodeByCloned = node => {
   const clonedNode = node.cloneNode(true)
   node.parentNode.replaceChild(clonedNode, node)
 }
@@ -404,8 +400,6 @@ document.addEventListener('keydown', event => {
     if (event.code === 'KeyP' && gameState.playerTurn === PLAYER_TWO) {
       rollDices()
     }
-    //  e.key === ' '
-    // ' ' is standard, 'Spacebar' was used by IE9 and Firefox < 37
     if (
       event.code === 'Space' &&
       (gameState.pointsToSafeForPlayerOne !== 0 ||
@@ -423,10 +417,10 @@ setTimeout(() => {
   document.querySelector('.intro-logo').classList.add('intro-logo--remove')
 }, 4000)
 
-function onAbout() {
+const onAbout = () => {
   document.querySelector('.about-pop-up').classList.add('about-pop-up--show')
 }
 
-function hideAbout() {
+const hideAbout = () => {
   document.querySelector('.about-pop-up').classList.remove('about-pop-up--show')
 }
