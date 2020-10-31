@@ -1,3 +1,4 @@
+// window.addEventListener('DOMContentLoaded', function () {
 // music
 const audio_main_music = document.getElementById('audio-main-music')
 audio_main_music.loop = true
@@ -424,3 +425,4 @@ const onAbout = () => {
 const hideAbout = () => {
   document.querySelector('.about-pop-up').classList.remove('about-pop-up--show')
 }
+// })
