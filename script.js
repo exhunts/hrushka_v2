@@ -1,4 +1,3 @@
-// window.addEventListener('DOMContentLoaded', function () {
 // music
 const audio_main_music = document.getElementById('audio-main-music')
 audio_main_music.loop = true
@@ -25,17 +24,17 @@ audio_pig_sound.volume = 0.7
 const PLAYER_ONE = 1
 const PLAYER_TWO = 2
 const NONE = 0
-const MAX_FINAL_SCORE = 9999
+const MAX_FINAL_SCORE = 9999 // MAX_WIN_POINTS
 
 // main state
 let gameState = {
-  pointsOfPlayerOne: 0,
-  pointsOfPlayerTwo: 0,
-  pointsToSafeForPlayerOne: 0,
-  pointsToSafeForPlayerTwo: 0,
+  pointsOfPlayerOne: 0, // playerOneCollectedPoints
+  pointsOfPlayerTwo: 0, // playerTwoCollectedPoints
+  pointsToSafeForPlayerOne: 0, // playerOneSafePoints
+  pointsToSafeForPlayerTwo: 0, // playerTwoSafePoints
   playerTurn: PLAYER_ONE,
-  finalScore: 10,
-  isGamePlaing: false,
+  finalScore: 10, // winPoints
+  isGamePlaing: false, // isGamePlaying
   firstDicePoints: 0,
   secondDicePoints: 0,
   playerWin: NONE,
@@ -158,7 +157,6 @@ const render = atAction => {
           'animate__infinite',
           'animate__flip'
         )
-
       document.getElementById('btn-hold').classList.add('btn--disabled')
       document
         .getElementById('btn-roll-dices')
@@ -187,14 +185,12 @@ const render = atAction => {
       document
         .getElementById('dice-2')
         .classList.add('animate__animated', 'animate__rotateIn')
-
       document.getElementById(
         'dice-1'
       ).src = `images/dice-${gameState.firstDicePoints}.png`
       document.getElementById(
         'dice-2'
       ).src = `images/dice-${gameState.secondDicePoints}.png`
-
       document.getElementById('player-1-safe-points').innerText =
         gameState.pointsToSafeForPlayerOne
       document.getElementById('player-2-safe-points').innerText =
@@ -351,7 +347,72 @@ const playSound = atAction => {
   }
 }
 
-// other
+// other >>>
+// utils
+const rollDice = () => {
+  return getRandomIntFromTo(1, 6)
+}
+
+const getRandomPlayerTurn = () => {
+  return getRandomIntFromTo(1, 2)
+}
+
+const getRandomIntFromTo = (from, to) => {
+  return from + Math.floor(Math.random() * (to - from + 1))
+}
+
+// !!! not used but don't delete it >>>
+function remountCloneNodeWithoutClasses(none, ...classes) {
+  const clonedNode = node.cloneNode(true)
+  clonedNode.classList.remove(...classes)
+  node.parentNode.replaceChild(clonedNode, node)
+}
+// function remountNodeByClonedUseClasses () {}
+// <<<
+
+const remountNodeByCloned = node => {
+  const clonedNode = node.cloneNode(true)
+  node.parentNode.replaceChild(clonedNode, node)
+}
+
+// keyboard control
+document.addEventListener('keydown', event => {
+  if (!gameState.isGamePlaing && event.code === 'Enter') {
+    newGame()
+  }
+  if (gameState.isGamePlaing) {
+    if (event.code === 'KeyQ' && gameState.playerTurn === PLAYER_ONE) {
+      rollDices()
+    }
+    if (event.code === 'KeyP' && gameState.playerTurn === PLAYER_TWO) {
+      rollDices()
+    }
+    if (
+      event.code === 'Space' &&
+      (gameState.pointsToSafeForPlayerOne !== 0 ||
+        gameState.pointsToSafeForPlayerTwo !== 0)
+    ) {
+      event.preventDefault()
+      hold()
+    }
+  }
+})
+
+// DOM
+document.getElementById('win-input').value = gameState.finalScore
+
+setTimeout(() => {
+  document.querySelector('.intro-logo').classList.add('intro-logo--remove')
+}, 4000)
+
+const onAbout = () => {
+  document.querySelector('.about-pop-up').classList.add('about-pop-up--show')
+}
+
+const hideAbout = () => {
+  document.querySelector('.about-pop-up').classList.remove('about-pop-up--show')
+}
+
 const onWinScoreInput = () => {
   const $win_input = document.getElementById('win-input')
   const win_input_value = Number($win_input.value)
@@ -375,64 +436,3 @@ const onWinScoreInputBlur = () => {
     initGameState.finalScore = 10
   }
 }
-
-const rollDice = () => {
-  return getRandomIntFromTo(1, 6)
-}
-
-const getRandomPlayerTurn = () => {
-  return getRandomIntFromTo(1, 2)
-}
-
-const getRandomIntFromTo = (from, to) => {
-  return from + Math.floor(Math.random() * (to - from + 1))
-}
-
-// !!! not used but don't delete it
-function remountCloneNodeWithoutClasses(none, ...classes) {
-  const clonedNode = node.cloneNode(true)
-  clonedNode.classList.remove(...classes)
-  node.parentNode.replaceChild(clonedNode, node)
-}
-
-const remountNodeByCloned = node => {
-  const clonedNode = node.cloneNode(true)
-  node.parentNode.replaceChild(clonedNode, node)
-}
-
-document.addEventListener('keydown', event => {
-  if (!gameState.isGamePlaing && event.code === 'Enter') {
-    newGame()
-  }
-  if (gameState.isGamePlaing) {
-    if (event.code === 'KeyQ' && gameState.playerTurn === PLAYER_ONE) {
-      rollDices()
-    }
-    if (event.code === 'KeyP' && gameState.playerTurn === PLAYER_TWO) {
-      rollDices()
-    }
-    if (
-      event.code === 'Space' &&
-      (gameState.pointsToSafeForPlayerOne !== 0 ||
-        gameState.pointsToSafeForPlayerTwo !== 0)
-    ) {
-      event.preventDefault()
-      hold()
-    }
-  }
-})
-
-document.getElementById('win-input').value = gameState.finalScore
-
-setTimeout(() => {
-  document.querySelector('.intro-logo').classList.add('intro-logo--remove')
-}, 4000)
-
-const onAbout = () => {
-  document.querySelector('.about-pop-up').classList.add('about-pop-up--show')
-}
-
-const hideAbout = () => {
-  document.querySelector('.about-pop-up').classList.remove('about-pop-up--show')
-}
-// })
