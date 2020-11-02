@@ -401,6 +401,7 @@ document.addEventListener('keydown', event => {
 // DOM
 document.getElementById('win-input').value = gameState.finalScore
 
+// logo
 setTimeout(() => {
   document.querySelector('.intro-logo').classList.add('intro-logo--remove')
 }, 4000)
