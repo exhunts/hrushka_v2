@@ -57,7 +57,7 @@ const initGameState = {
 
 // logic
 const newGame = () => {
-  gameState = { ...initGameState, finalScore: gameState.finalScore }
+  gameState = { ...initGameState }
   gameState.isGamePlaing = true
   render('newgame')
   playSound('newgame')
@@ -353,16 +353,26 @@ const playSound = atAction => {
 
 // other
 const onWinScoreInput = () => {
-  gameState.finalScore = +document.getElementById('win-input').value
-  if (+document.getElementById('win-input').value > MAX_FINAL_SCORE) {
-    document.getElementById('win-input').value = MAX_FINAL_SCORE
-    gameState.finalScore = MAX_FINAL_SCORE
+  const $win_input = document.getElementById('win-input')
+  const win_input_value = Number($win_input.value)
+  if (Number.isNaN(win_input_value)) {
+    document.getElementById('win-input').value = gameState.finalScore
+  } else {
+    if (win_input_value > MAX_FINAL_SCORE) {
+      $win_input.value = MAX_FINAL_SCORE
+      gameState.finalScore = MAX_FINAL_SCORE
+      initGameState.finalScore = MAX_FINAL_SCORE
+    } else {
+      gameState.finalScore = win_input_value
+      initGameState.finalScore = win_input_value
+    }
   }
 }
 
 const onWinScoreInputBlur = () => {
   if (document.getElementById('win-input').value === '') {
     gameState.finalScore = 10
+    initGameState.finalScore = 10
   }
 }
 
