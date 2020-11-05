@@ -35,8 +35,8 @@ let gameState = {
   playerTurn: PLAYER_ONE,
   finalScore: 10, // winPoints
   isGamePlaing: false, // isGamePlaying
-  firstDicePoints: 0,
-  secondDicePoints: 0,
+  firstDicePoints: 0, // firstDiceDroppedPoints
+  secondDicePoints: 0, // secondDiceDroppedPoints
   playerWin: NONE,
 }
 
