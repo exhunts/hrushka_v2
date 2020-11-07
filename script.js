@@ -56,7 +56,7 @@ const initGameState = {
 
 // logic
 const newGame = () => {
-  gameState = { ...initGameState }
+  gameState = { ...initGameState, playerTurn: getRandomPlayerTurn() }
   gameState.isGamePlaing = true
   render('newgame')
   playSound('newgame')
@@ -127,6 +127,8 @@ const render = atAction => {
     case 'newgame':
       document.getElementById('first-player-name').innerText = 'first'
       document.getElementById('second-player-name').innerText = 'second'
+      document.getElementById('result-img-player-1').src = ''
+      document.getElementById('result-img-player-2').src = ''
       document
         .getElementById('first-player-name')
         .classList.remove(
@@ -141,8 +143,6 @@ const render = atAction => {
           'animate__infinite',
           'animate__rubberBand'
         )
-      document.getElementById('result-img-player-1').src = ''
-      document.getElementById('result-img-player-2').src = ''
       document
         .getElementById('result-img-player-1')
         .classList.remove(
@@ -157,12 +157,31 @@ const render = atAction => {
           'animate__infinite',
           'animate__flip'
         )
+      document
+        .getElementById('result-img-player-1')
+        .classList.remove('animate__animated', 'animate__swing')
+      document
+        .getElementById('result-img-player-2')
+        .classList.remove('animate__animated', 'animate__swing')
       document.getElementById('btn-hold').classList.add('btn--disabled')
       document
         .getElementById('btn-roll-dices')
         .classList.remove('btn--disabled')
-      document.getElementById('player-1-dancer').classList.add('dance')
-      document.getElementById('player-2-dancer').classList.remove('dance')
+
+      switch (gameState.playerTurn) {
+        case PLAYER_ONE:
+          document.getElementById('player-1-dancer').classList.add('dance')
+          document.getElementById('player-2-dancer').classList.remove('dance')
+          break
+        case PLAYER_TWO:
+          document.getElementById('player-2-dancer').classList.add('dance')
+          document.getElementById('player-1-dancer').classList.remove('dance')
+          break
+
+        default:
+          break
+      }
+
       document.getElementById('player-1-safe-points').innerText =
         gameState.pointsToSafeForPlayerOne
       document.getElementById('player-2-safe-points').innerText =
@@ -174,7 +193,9 @@ const render = atAction => {
       break
 
     case 'rolldices':
-      if (gameState.firstDicePoints === 1 || gameState.secondDicePoints === 1) {
+      let isWasDotPoint =
+        gameState.firstDicePoints === 1 || gameState.secondDicePoints === 1
+      if (isWasDotPoint) {
         document.getElementById('btn-hold').classList.add('btn--disabled')
       } else {
         document.getElementById('btn-hold').classList.remove('btn--disabled')
@@ -198,13 +219,11 @@ const render = atAction => {
 
       switch (gameState.playerTurn) {
         case PLAYER_ONE:
-          document.getElementById('player-1-dancer').classList.remove('dance')
           document.getElementById('player-2-dancer').classList.remove('dance')
           document.getElementById('player-1-dancer').classList.add('dance')
           break
         case PLAYER_TWO:
           document.getElementById('player-1-dancer').classList.remove('dance')
-          document.getElementById('player-2-dancer').classList.remove('dance')
           document.getElementById('player-2-dancer').classList.add('dance')
           break
       }
@@ -221,83 +240,74 @@ const render = atAction => {
       document.getElementById('player-1-safe-points').innerText = 0
       document.getElementById('player-2-safe-points').innerText = 0
 
-      switch (gameState.playerTurn) {
-        case PLAYER_ONE:
-          document.getElementById('player-1-dancer').classList.remove('dance')
-          document.getElementById('player-2-dancer').classList.remove('dance')
-          document.getElementById('player-1-dancer').classList.add('dance')
-          break
-        case PLAYER_TWO:
-          document.getElementById('player-1-dancer').classList.remove('dance')
-          document.getElementById('player-2-dancer').classList.remove('dance')
-          document.getElementById('player-2-dancer').classList.add('dance')
-          break
-      }
-
-      switch (gameState.playerWin) {
-        case PLAYER_ONE:
-          document.getElementById('first-player-name').innerText = 'win'
-          document
-            .getElementById('first-player-name')
-            .classList.add(
-              'animate__animated',
-              'animate__infinite',
-              'animate__rubberBand'
-            )
-          document.getElementById('second-player-name').innerText = 'loose'
-          document.getElementById('player-1-dancer').classList.remove('dance')
-          document.getElementById('player-2-dancer').classList.remove('dance')
-          document.getElementById('result-img-player-1').src =
-            'images/win-pig.png'
-          document
-            .getElementById('result-img-player-1')
-            .classList.add(
-              'animate__animated',
-              'animate__infinite',
-              'animate__flip'
-            )
-          document.getElementById('result-img-player-2').src =
-            'images/cat-loose.png'
-          document
-            .getElementById('result-img-player-2')
-            .classList.add('animate__animated', 'animate__swing')
-          document.getElementById('btn-hold').classList.add('btn--disabled')
-          document
-            .getElementById('btn-roll-dices')
-            .classList.add('btn--disabled')
-          break
-
-        case PLAYER_TWO:
-          document.getElementById('first-player-name').innerText = 'loose'
-          document.getElementById('second-player-name').innerText = 'win'
-          document
-            .getElementById('second-player-name')
-            .classList.add(
-              'animate__animated',
-              'animate__infinite',
-              'animate__rubberBand'
-            )
-          document.getElementById('player-1-dancer').classList.remove('dance')
-          document.getElementById('player-2-dancer').classList.remove('dance')
-          document.getElementById('btn-hold').classList.add('btn--disabled')
-          document
-            .getElementById('btn-roll-dices')
-            .classList.add('btn--disabled')
-          document.getElementById('result-img-player-1').src =
-            'images/cat-loose.png'
-          document
-            .getElementById('result-img-player-1')
-            .classList.add('animate__animated', 'animate__swing')
-          document.getElementById('result-img-player-2').src =
-            'images/win-pig.png'
-          document
-            .getElementById('result-img-player-2')
-            .classList.add(
-              'animate__animated',
-              'animate__infinite',
-              'animate__flip'
-            )
-          break
+      if (gameState.playerWin === NONE) {
+        switch (gameState.playerTurn) {
+          case PLAYER_ONE:
+            document.getElementById('player-2-dancer').classList.remove('dance')
+            document.getElementById('player-1-dancer').classList.add('dance')
+            break
+          case PLAYER_TWO:
+            document.getElementById('player-1-dancer').classList.remove('dance')
+            document.getElementById('player-2-dancer').classList.add('dance')
+            break
+        }
+      } else {
+        document.getElementById('player-1-dancer').classList.remove('dance')
+        document.getElementById('player-2-dancer').classList.remove('dance')
+        document.getElementById('btn-hold').classList.add('btn--disabled')
+        document.getElementById('btn-roll-dices').classList.add('btn--disabled')
+        switch (gameState.playerWin) {
+          case PLAYER_ONE:
+            document.getElementById('first-player-name').innerText = 'win'
+            document.getElementById('second-player-name').innerText = 'loose'
+            document
+              .getElementById('first-player-name')
+              .classList.add(
+                'animate__animated',
+                'animate__infinite',
+                'animate__rubberBand'
+              )
+            document
+              .getElementById('result-img-player-1')
+              .classList.add(
+                'animate__animated',
+                'animate__infinite',
+                'animate__flip'
+              )
+            document
+              .getElementById('result-img-player-2')
+              .classList.add('animate__animated', 'animate__swing')
+            document.getElementById('result-img-player-1').src =
+              'images/win-pig.png'
+            document.getElementById('result-img-player-2').src =
+              'images/cat-loose.png'
+            break
+          case PLAYER_TWO:
+            document.getElementById('first-player-name').innerText = 'loose'
+            document.getElementById('second-player-name').innerText = 'win'
+            document
+              .getElementById('second-player-name')
+              .classList.add(
+                'animate__animated',
+                'animate__infinite',
+                'animate__rubberBand'
+              )
+            document.getElementById('result-img-player-1').src =
+              'images/cat-loose.png'
+            document.getElementById('result-img-player-2').src =
+              'images/win-pig.png'
+            document
+              .getElementById('result-img-player-1')
+              .classList.add('animate__animated', 'animate__swing')
+            document
+              .getElementById('result-img-player-2')
+              .classList.add(
+                'animate__animated',
+                'animate__infinite',
+                'animate__flip'
+              )
+            break
+        }
       }
       break
     default:
@@ -315,6 +325,9 @@ const playSound = atAction => {
       break
 
     case 'hold':
+      audio_cash_sound.pause()
+      audio_cash_sound.currentTime = 0
+      audio_cash_sound.play()
       const isOneOfThePlayersWin =
         gameState.pointsOfPlayerOne >= gameState.finalScore ||
         gameState.pointsOfPlayerTwo >= gameState.finalScore
@@ -324,9 +337,6 @@ const playSound = atAction => {
         audio_win_music.play()
         audio_pig_sound.play()
       }
-      audio_cash_sound.pause()
-      audio_cash_sound.currentTime = 0
-      audio_cash_sound.play()
       break
 
     case 'rolldices':
@@ -403,8 +413,8 @@ document.getElementById('win-input').value = gameState.finalScore
 
 // logo
 setTimeout(() => {
-  document.querySelector('.intro-logo').classList.add('intro-logo--remove')
-}, 4000)
+  document.querySelector('.logo-screen').style.display = 'none'
+}, 7000)
 
 const onAbout = () => {
   document.querySelector('.about-pop-up').classList.add('about-pop-up--show')

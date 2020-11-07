@@ -1,12 +1,18 @@
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: inherit;
 }
 
-body {
+/* body {
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+  position: relative;
   overflow: hidden;
-}
+} */
 
 .winner-text {
   position: absolute;
@@ -39,13 +45,12 @@ body {
   display: block;
 }
 
-/* logo */
-.intro-logo {
+/* logo >>> */
+/* .intro-logo {
   position: absolute;
   background-color: white;
   height: 100vh;
   width: 100%;
-  /* position: absolute; */
   z-index: 5;
   animation: intro-logo 4s;
   opacity: 0;
@@ -53,7 +58,25 @@ body {
 
 .intro-logo--remove {
   display: none;
+} */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
 }
+
+body {
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+/* <<< logo */
 
 @keyframes intro-logo {
   0% {
@@ -115,7 +138,7 @@ body {
 
 .scroll {
   position: absolute;
-  background-image: url(images/scroll.png);
+  background-image: url(../images/scroll.png);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -225,7 +248,7 @@ body {
       rgba(62, 20, 20, 0.4),
       rgba(62, 20, 20, 0.4)
     ),
-    url(images/background.jpg);
+    url(../images/background.jpg);
   background-size: cover;
   background-position: center;
   background-color: #f6fcff;
@@ -233,6 +256,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
+  /* display: none; */
 }
 
 .panel {
@@ -413,12 +438,12 @@ body {
 /* fonts */
 @font-face {
   font-family: duncecapbb_reg;
-  src: url(fonts/duncecapbb_reg.ttf);
+  src: url(../fonts/duncecapbb_reg.ttf);
 }
 
 @font-face {
   font-family: Lato-Light;
-  src: url(fonts/Lato-Light.ttf);
+  src: url(../fonts/Lato-Light.ttf);
 }
 
 /* --------------- animate.css --------------- */
