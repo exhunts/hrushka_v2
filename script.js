@@ -46,7 +46,7 @@ const initGameState = {
   pointsOfPlayerTwo: 0,
   pointsToSafeForPlayerOne: 0,
   pointsToSafeForPlayerTwo: 0,
-  playerTurn: PLAYER_ONE,
+  playerTurn: NONE,
   finalScore: 10,
   isGamePlaing: false,
   firstDicePoints: 0,
@@ -177,7 +177,6 @@ const render = atAction => {
           document.getElementById('player-2-dancer').classList.add('dance')
           document.getElementById('player-1-dancer').classList.remove('dance')
           break
-
         default:
           break
       }

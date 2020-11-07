@@ -1,5 +1,4 @@
 .logo-screen {
-  font-family: Fami;
   font-size: 78px;
   height: 100%;
   width: 100%;
@@ -25,6 +24,7 @@
 }
 
 .exlogo__outer {
+  font-family: Fami;
   height: 350px;
   width: 350px;
   background-color: #959fff;

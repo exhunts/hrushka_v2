@@ -6,14 +6,6 @@
   box-sizing: inherit;
 }
 
-/* body {
-  height: 100vh;
-  width: 100vw;
-  box-sizing: border-box;
-  position: relative;
-  overflow: hidden;
-} */
-
 .winner-text {
   position: absolute;
   text-align: center;
@@ -35,37 +27,12 @@
   top: 0;
   left: 0;
   z-index: 4;
-  /* transition: all 0.5s ease-out; */
   display: none;
 }
 
 .about-pop-up--show {
-  /* transition: all 0.5s ease-out; */
   height: 100vh;
   display: block;
-}
-
-/* logo >>> */
-/* .intro-logo {
-  position: absolute;
-  background-color: white;
-  height: 100vh;
-  width: 100%;
-  z-index: 5;
-  animation: intro-logo 4s;
-  opacity: 0;
-}
-
-.intro-logo--remove {
-  display: none;
-} */
-
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: inherit;
 }
 
 body {
@@ -76,9 +43,7 @@ body {
   overflow: hidden;
 }
 
-/* <<< logo */
-
-@keyframes intro-logo {
+/* @keyframes intro-logo {
   0% {
     opacity: 1;
   }
@@ -88,7 +53,7 @@ body {
   100% {
     opacity: 0;
   }
-}
+} */
 
 .big-rect {
   position: absolute;
@@ -131,9 +96,6 @@ body {
   background-color: #e8eaff;
   animation: little-rect 1s ease-out 2s;
   border-radius: 10px;
-
-  /* transform: rotate(45deg); */
-  /* transform-origin: unset; */
 }
 
 .scroll {
@@ -164,10 +126,6 @@ body {
   justify-content: center;
 }
 
-/* .scroll__logo-box {
-  margin-top: 30px;
-} */
-
 .text {
   font-size: 30px;
 }
@@ -187,7 +145,6 @@ body {
     transform: rotate(0deg) translate(-50%, -50%);
   }
   50% {
-    /* opacity: 1; */
     transform: rotate(45deg) translate(-50%, -50%);
   }
   100% {
@@ -202,7 +159,6 @@ body {
     transform: rotate(45deg) translate(-50%, -50%);
   }
   50% {
-    /* opacity: 1; */
     transform: rotate(0deg) translate(-50%, -50%);
   }
   100% {
@@ -217,7 +173,6 @@ body {
     transform: rotate(0deg) translate(-50%, -50%);
   }
   50% {
-    /* opacity: 1; */
     transform: rotate(45deg) translate(-50%, -50%);
   }
   100% {
@@ -257,7 +212,6 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 1;
-  /* display: none; */
 }
 
 .panel {
@@ -279,9 +233,6 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  /* transform-style: preserve-3d; */
-  /* transform: translateZ(0); */
-  /* transform: scale(1); */
 }
 .test {
   backface-visibility: hidden;
@@ -292,7 +243,6 @@ body {
   align-items: center;
   justify-content: center;
   border: none;
-  font-family: font;
   font-size: 20px;
   height: 40px;
   width: 180px;
@@ -314,9 +264,6 @@ body {
 .btn:hover {
   transform: scale(1.5);
   transition: 0.3s;
-  /* backface-visibility: hidden; */
-
-  /* width: 380px; */
 }
 
 .btn--green {
@@ -425,9 +372,6 @@ body {
 .win-pig {
   position: absolute;
   width: 200px;
-  /* visibility: hidden; */
-  /* animation-name: pig-anim;
-  animation-duration: 2s; */
 }
 
 .loose-cat {
