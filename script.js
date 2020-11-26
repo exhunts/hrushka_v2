@@ -24,69 +24,70 @@ audio_pig_sound.volume = 0.7
 const PLAYER_ONE = 1
 const PLAYER_TWO = 2
 const NONE = 0
-const MAX_FINAL_SCORE = 9999 // MAX_WIN_POINTS
+const MAX_WIN_POINTS = 9999
 
 // main state
 let gameState = {
-  pointsOfPlayerOne: 0, // playerOneCollectedPoints
-  pointsOfPlayerTwo: 0, // playerTwoCollectedPoints
-  pointsToSafeForPlayerOne: 0, // playerOneSafePoints
-  pointsToSafeForPlayerTwo: 0, // playerTwoSafePoints
+  playerOneCollectedPoints: 0,
+  playerTwoCollectedPoints: 0,
+  playerOneSafePoints: 0,
+  playerTwoSafePoints: 0,
   playerTurn: PLAYER_ONE,
-  finalScore: 10, // winPoints
-  isGamePlaing: false, // isGamePlaying
-  firstDicePoints: 0, // firstDiceDroppedPoints
-  secondDicePoints: 0, // secondDiceDroppedPoints
+  winPoints: 10,
+  isGamePlaying: false,
+  firstDiceDroppedPoints: 0,
+  secondDiceDroppedPoints: 0,
   playerWin: NONE,
 }
 
 //state initializer
 const initGameState = {
-  pointsOfPlayerOne: 0,
-  pointsOfPlayerTwo: 0,
-  pointsToSafeForPlayerOne: 0,
-  pointsToSafeForPlayerTwo: 0,
+  playerOneCollectedPoints: 0,
+  playerTwoCollectedPoints: 0,
+  playerOneSafePoints: 0,
+  playerTwoSafePoints: 0,
   playerTurn: NONE,
-  finalScore: 10,
-  isGamePlaing: false,
-  firstDicePoints: 0,
-  secondDicePoints: 0,
+  winPoints: 10,
+  isGamePlaying: false,
+  firstDiceDroppedPoints: 0,
+  secondDiceDroppedPoints: 0,
   playerWin: NONE,
 }
 
 // logic
 const newGame = () => {
   gameState = { ...initGameState, playerTurn: getRandomPlayerTurn() }
-  gameState.isGamePlaing = true
+  gameState.isGamePlaying = true
   render('newgame')
   playSound('newgame')
 }
 
 const rollDices = () => {
-  gameState.firstDicePoints = rollDice()
-  gameState.secondDicePoints = rollDice()
+  gameState.firstDiceDroppedPoints = rollDice()
+  gameState.secondDiceDroppedPoints = rollDice()
   const isWasDotPoint =
-    gameState.firstDicePoints === 1 || gameState.secondDicePoints === 1
+    gameState.firstDiceDroppedPoints === 1 ||
+    gameState.secondDiceDroppedPoints === 1
   if (isWasDotPoint) {
     switch (gameState.playerTurn) {
       case PLAYER_ONE:
-        gameState.pointsToSafeForPlayerOne = 0
+        gameState.playerOneSafePoints = 0
         gameState.playerTurn = PLAYER_TWO
         break
       case PLAYER_TWO:
-        gameState.pointsToSafeForPlayerTwo = 0
+        gameState.playerTwoSafePoints = 0
         gameState.playerTurn = PLAYER_ONE
         break
     }
   } else {
     switch (gameState.playerTurn) {
       case PLAYER_ONE:
-        gameState.pointsToSafeForPlayerOne +=
-          gameState.firstDicePoints + gameState.secondDicePoints
+        gameState.playerOneSafePoints +=
+          gameState.firstDiceDroppedPoints + gameState.secondDiceDroppedPoints
         break
       case PLAYER_TWO:
-        gameState.pointsToSafeForPlayerTwo +=
-          gameState.firstDicePoints + gameState.secondDicePoints
+        gameState.playerTwoSafePoints +=
+          gameState.firstDiceDroppedPoints + gameState.secondDiceDroppedPoints
         break
     }
   }
@@ -97,21 +98,21 @@ const rollDices = () => {
 const hold = () => {
   switch (gameState.playerTurn) {
     case PLAYER_ONE:
-      gameState.pointsOfPlayerOne += gameState.pointsToSafeForPlayerOne
-      gameState.pointsToSafeForPlayerOne = 0
-      if (gameState.pointsOfPlayerOne >= gameState.finalScore) {
+      gameState.playerOneCollectedPoints += gameState.playerOneSafePoints
+      gameState.playerOneSafePoints = 0
+      if (gameState.playerOneCollectedPoints >= gameState.winPoints) {
         gameState.playerWin = PLAYER_ONE
-        gameState.isGamePlaing = false
+        gameState.isGamePlaying = false
       } else {
         gameState.playerTurn = PLAYER_TWO
       }
       break
     case PLAYER_TWO:
-      gameState.pointsOfPlayerTwo += gameState.pointsToSafeForPlayerTwo
-      gameState.pointsToSafeForPlayerTwo = 0
-      if (gameState.pointsOfPlayerTwo >= gameState.finalScore) {
+      gameState.playerTwoCollectedPoints += gameState.playerTwoSafePoints
+      gameState.playerTwoSafePoints = 0
+      if (gameState.playerTwoCollectedPoints >= gameState.winPoints) {
         gameState.playerWin = PLAYER_TWO
-        gameState.isGamePlaing = false
+        gameState.isGamePlaying = false
       } else {
         gameState.playerTurn = PLAYER_ONE
       }
@@ -182,18 +183,19 @@ const render = atAction => {
       }
 
       document.getElementById('player-1-safe-points').innerText =
-        gameState.pointsToSafeForPlayerOne
+        gameState.playerOneSafePoints
       document.getElementById('player-2-safe-points').innerText =
-        gameState.pointsToSafeForPlayerTwo
+        gameState.playerTwoSafePoints
       document.getElementById('player-1-score').innerText =
-        gameState.pointsOfPlayerOne
+        gameState.playerOneCollectedPoints
       document.getElementById('player-2-score').innerText =
-        gameState.pointsOfPlayerTwo
+        gameState.playerTwoCollectedPoints
       break
 
     case 'rolldices':
       let isWasDotPoint =
-        gameState.firstDicePoints === 1 || gameState.secondDicePoints === 1
+        gameState.firstDiceDroppedPoints === 1 ||
+        gameState.secondDiceDroppedPoints === 1
       if (isWasDotPoint) {
         document.getElementById('btn-hold').classList.add('btn--disabled')
       } else {
@@ -207,14 +209,14 @@ const render = atAction => {
         .classList.add('animate__animated', 'animate__rotateIn')
       document.getElementById(
         'dice-1'
-      ).src = `images/dice-${gameState.firstDicePoints}.png`
+      ).src = `images/dice-${gameState.firstDiceDroppedPoints}.png`
       document.getElementById(
         'dice-2'
-      ).src = `images/dice-${gameState.secondDicePoints}.png`
+      ).src = `images/dice-${gameState.secondDiceDroppedPoints}.png`
       document.getElementById('player-1-safe-points').innerText =
-        gameState.pointsToSafeForPlayerOne
+        gameState.playerOneSafePoints
       document.getElementById('player-2-safe-points').innerText =
-        gameState.pointsToSafeForPlayerTwo
+        gameState.playerTwoSafePoints
 
       switch (gameState.playerTurn) {
         case PLAYER_ONE:
@@ -233,9 +235,9 @@ const render = atAction => {
     case 'hold':
       document.getElementById('btn-hold').classList.add('btn--disabled')
       document.getElementById('player-1-score').innerText =
-        gameState.pointsOfPlayerOne
+        gameState.playerOneCollectedPoints
       document.getElementById('player-2-score').innerText =
-        gameState.pointsOfPlayerTwo
+        gameState.playerTwoCollectedPoints
       document.getElementById('player-1-safe-points').innerText = 0
       document.getElementById('player-2-safe-points').innerText = 0
 
@@ -328,8 +330,8 @@ const playSound = atAction => {
       audio_cash_sound.currentTime = 0
       audio_cash_sound.play()
       const isOneOfThePlayersWin =
-        gameState.pointsOfPlayerOne >= gameState.finalScore ||
-        gameState.pointsOfPlayerTwo >= gameState.finalScore
+        gameState.playerOneCollectedPoints >= gameState.winPoints ||
+        gameState.playerTwoCollectedPoints >= gameState.winPoints
       if (isOneOfThePlayersWin) {
         audio_main_music.pause()
         audio_main_music.currentTime = 0
@@ -343,7 +345,8 @@ const playSound = atAction => {
       audio_dices_sound.currentTime = 0
       audio_dices_sound.play()
       const isWasDotPoint =
-        gameState.firstDicePoints === 1 || gameState.secondDicePoints === 1
+        gameState.firstDiceDroppedPoints === 1 ||
+        gameState.secondDiceDroppedPoints === 1
       if (isWasDotPoint) {
         audio_giggle_sound.pause()
         audio_giggle_sound.currentTime = 0
@@ -386,10 +389,10 @@ const remountNodeByCloned = node => {
 
 // keyboard control
 document.addEventListener('keydown', event => {
-  if (!gameState.isGamePlaing && event.code === 'Enter') {
+  if (!gameState.isGamePlaying && event.code === 'Enter') {
     newGame()
   }
-  if (gameState.isGamePlaing) {
+  if (gameState.isGamePlaying) {
     if (event.code === 'KeyQ' && gameState.playerTurn === PLAYER_ONE) {
       rollDices()
     }
@@ -398,8 +401,8 @@ document.addEventListener('keydown', event => {
     }
     if (
       event.code === 'Space' &&
-      (gameState.pointsToSafeForPlayerOne !== 0 ||
-        gameState.pointsToSafeForPlayerTwo !== 0)
+      (gameState.playerOneSafePoints !== 0 ||
+        gameState.playerTwoSafePoints !== 0)
     ) {
       event.preventDefault()
       hold()
@@ -408,7 +411,7 @@ document.addEventListener('keydown', event => {
 })
 
 // DOM
-document.getElementById('win-input').value = gameState.finalScore
+document.getElementById('win-input').value = gameState.winPoints
 
 // logo
 setTimeout(() => {
@@ -427,22 +430,22 @@ const onWinScoreInput = () => {
   const $win_input = document.getElementById('win-input')
   const win_input_value = Number($win_input.value)
   if (Number.isNaN(win_input_value)) {
-    document.getElementById('win-input').value = gameState.finalScore
+    document.getElementById('win-input').value = gameState.winPoints
   } else {
-    if (win_input_value > MAX_FINAL_SCORE) {
-      $win_input.value = MAX_FINAL_SCORE
-      gameState.finalScore = MAX_FINAL_SCORE
-      initGameState.finalScore = MAX_FINAL_SCORE
+    if (win_input_value > MAX_WIN_POINTS) {
+      $win_input.value = MAX_WIN_POINTS
+      gameState.winPoints = MAX_WIN_POINTS
+      initGameState.winPoints = MAX_WIN_POINTS
     } else {
-      gameState.finalScore = win_input_value
-      initGameState.finalScore = win_input_value
+      gameState.winPoints = win_input_value
+      initGameState.winPoints = win_input_value
     }
   }
 }
 
 const onWinScoreInputBlur = () => {
   if (document.getElementById('win-input').value === '') {
-    gameState.finalScore = 10
-    initGameState.finalScore = 10
+    gameState.winPoints = 10
+    initGameState.winPoints = 10
   }
 }
