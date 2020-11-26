@@ -394,26 +394,25 @@ document.addEventListener('keydown', event => {
     return
   }
 
-  if (gameState.isGamePlaying) {
-    if (event.code === 'KeyQ' && gameState.playerTurn === PLAYER_ONE) {
-      rollDices()
-      return
-    }
+  if (!gameState.isGamePlaying) return
 
-    if (event.code === 'KeyP' && gameState.playerTurn === PLAYER_TWO) {
-      rollDices()
-      return
-    }
+  if (event.code === 'KeyQ' && gameState.playerTurn === PLAYER_ONE) {
+    rollDices()
+    return
+  }
 
-    if (
-      event.code === 'Space' &&
-      (gameState.playerOneSafePoints !== 0 ||
-        gameState.playerTwoSafePoints !== 0)
-    ) {
-      event.preventDefault()
-      hold()
-      return
-    }
+  if (event.code === 'KeyP' && gameState.playerTurn === PLAYER_TWO) {
+    rollDices()
+    return
+  }
+
+  let bothPlayersSafePointsNotZero =
+    gameState.playerOneSafePoints !== 0 || gameState.playerTwoSafePoints !== 0
+
+  if (event.code === 'Space' && bothPlayersSafePointsNotZero) {
+    event.preventDefault()
+    hold()
+    return
   }
 })
 
