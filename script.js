@@ -391,13 +391,16 @@ const remountNodeByCloned = node => {
 document.addEventListener('keydown', event => {
   if (!gameState.isGamePlaying && event.code === 'Enter') {
     newGame()
+    return
   }
   if (gameState.isGamePlaying) {
     if (event.code === 'KeyQ' && gameState.playerTurn === PLAYER_ONE) {
       rollDices()
+      return
     }
     if (event.code === 'KeyP' && gameState.playerTurn === PLAYER_TWO) {
       rollDices()
+      return
     }
     if (
       event.code === 'Space' &&
@@ -406,6 +409,7 @@ document.addEventListener('keydown', event => {
     ) {
       event.preventDefault()
       hold()
+      return
     }
   }
 })
