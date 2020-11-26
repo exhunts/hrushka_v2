@@ -393,15 +393,18 @@ document.addEventListener('keydown', event => {
     newGame()
     return
   }
+
   if (gameState.isGamePlaying) {
     if (event.code === 'KeyQ' && gameState.playerTurn === PLAYER_ONE) {
       rollDices()
       return
     }
+
     if (event.code === 'KeyP' && gameState.playerTurn === PLAYER_TWO) {
       rollDices()
       return
     }
+
     if (
       event.code === 'Space' &&
       (gameState.playerOneSafePoints !== 0 ||
