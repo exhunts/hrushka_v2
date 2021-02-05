@@ -1,3 +1,3 @@
-# fonts
+# Funny and hilarious game for every one
 
-https://www.urbanfonts.com/fonts/rounded-fonts_page-7.htm
+Play when you are sad with your friends
