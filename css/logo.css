@@ -11,6 +11,23 @@
   opacity: 0;
 }
 
+.logo-screen__message {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: Ubuntu-Medium;
+  color: rgb(121, 121, 121);
+  font-size: 50px;
+}
+
+.logo-screen__message--bottom {
+  bottom: 10px;
+}
+
+.logo-screen__message--top {
+  top: 10px;
+}
+
 @keyframes logo-screen--anim-fade {
   0% {
     opacity: 1;
@@ -178,4 +195,9 @@
 @font-face {
   font-family: Fami;
   src: url(../fonts/Edition-BxnV.ttf);
+}
+
+@font-face {
+  font-family: Ubuntu-Medium;
+  src: url(../fonts/Ubuntu-Medium.ttf);
 }
