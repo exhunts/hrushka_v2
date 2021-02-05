@@ -379,6 +379,16 @@ body {
   width: 200px;
 }
 
+.author {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-family: Lato-Light, sans-serif;
+  font-weight: bolder;
+}
+
 /* fonts */
 @font-face {
   font-family: duncecapbb_reg;
