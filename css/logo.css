@@ -57,12 +57,12 @@
 }
 
 .exlogo__outer::before {
-  content: 'Exception';
+  content: 'Gregory';
   position: absolute;
-  top: -65px;
+  top: -87px;
   left: 50%;
   transform: translate(-50%);
-  font-size: 54px;
+  font-size: 65px;
   color: rgb(110 110 110);
   opacity: 1;
   animation: exception-text-anim 6s;
@@ -105,7 +105,7 @@
 }
 
 .exlogo__inner::before {
-  content: 'Hunters';
+  content: 'Kafanov';
   position: absolute;
   top: 11px;
   left: 50%;
