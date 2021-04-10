@@ -6,6 +6,18 @@
   box-sizing: inherit;
 }
 
+* {
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  /*
+    Introduced in IE 10.
+    See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+  */
+  -ms-user-select: none;
+  user-select: none;
+}
+
 .winner-text {
   position: absolute;
   text-align: center;
@@ -382,12 +394,26 @@ body {
 
 .author {
   position: absolute;
-  bottom: 0px;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
   color: white;
   font-family: Lato-Light, sans-serif;
   font-weight: bolder;
+}
+
+.email {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-family: Lato-Light, sans-serif;
+  font-weight: bolder;
+}
+
+.email span {
+  user-select: all;
 }
 
 /* fonts */
